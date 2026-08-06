@@ -1,0 +1,463 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base reset ─────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ── Light mode tokens ──────────────────────── */
+:root {
+  --sidebar-w: 260px;
+  --serviceops-depth: #78350F;
+  --serviceops-primary: #F59E0B;
+  --serviceops-action: #FBBF24;
+  --serviceops-hover: #FCD34D;
+  --serviceops-soft: #FDE68A;
+  --serviceops-tint: #FAF2DB;
+  --serviceops-surface: #FFFBEB;
+  --bg-page: #fffefb;
+  --bg-card: #FFFDF7;
+  --bg-sidebar: #78350F;
+  --bg-topbar: var(--serviceops-tint);
+  --border: var(--serviceops-soft);
+  --border-soft: var(--serviceops-tint);
+  --text-primary: var(--serviceops-depth);
+  --text-body: #5C3A1E;
+  --text-muted: #9B6F3F;
+  --text-faint: #B88B54;
+}
+
+/* ── Dark mode tokens — ServiceOps amber system ── */
+html.dark {
+  --background: #18110B;
+  --foreground: #FFF3D6;
+  --card: #21160D;
+  --card-foreground: #FFF3D6;
+  --popover: #22160D;
+  --popover-foreground: #FFF3D6;
+  --border: #4B2F1C;
+  --input: #21160D;
+  --ring: #FCD34D;
+
+  --serviceops-depth: #FFF3D6;
+  --serviceops-primary: #FBBF24;
+  --serviceops-action: #F59E0B;
+  --serviceops-hover: #FDE68A;
+  --serviceops-soft: #7C3D10;
+  --serviceops-tint: #2D180D;
+  --serviceops-surface: #18110B;
+
+  --bg-page: var(--serviceops-surface);
+  --bg-card: #21160D;
+  --bg-surface-2: #22160D;
+  --bg-sidebar: #120C07;
+  --bg-topbar: #21160D;
+  --border-soft: #4B2F1C;
+
+  --text-primary: #FFF3D6;
+  --text-secondary: #F7E2B2;
+  --text-tertiary: #D4B57B;
+  --text-body: #F7E2B2;
+  --text-muted: #D0A966;
+  --text-faint: #B88B54;
+  --text-disabled: #8C6A3F;
+
+  --link-fg: #F7E2B2;
+  --link-hover: #FFF3D6;
+  --accent: #4B2F1C;
+  --accent-fg: #FFF3D6;
+
+  --btn-primary-bg: #F59E0B;
+  --btn-primary-hover: #FBBF24;
+  --btn-primary-active: #FCD34D;
+
+  --sidebar-item-hover: #2D180D;
+  --sidebar-item-active: #4B2F1C;
+
+  --scrollbar-track: #2D180D;
+  --scrollbar-thumb: #8B5E2D;
+  --scrollbar-thumb-hover: #C07A2E;
+
+  --focus-ring: #FCD34D;
+  --focus-ring-offset: #18110B;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.55);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.65);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.75);
+
+  --chart-1: #F59E0B;
+  --chart-2: #FBBF24;
+  --chart-3: #FDE68A;
+  --chart-4: #FCD34D;
+  --chart-5: #EAB308;
+  --chart-6: #D97706;
+  --chart-7: #FB923C;
+  --chart-8: #C2410C;
+
+  --chart-grid: #4B2F1C;
+  --chart-axis: #D0A966;
+  --chart-label: #F7E2B2;
+
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-error: #EF4444;
+  --status-info: #FBBF24;
+  --status-pending: #D0A966;
+
+  --skeleton-bg: #2D180D;
+  --skeleton-shimmer: rgba(255,255,255,0.08);
+}
+
+body {
+  background-color: var(--bg-page);
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Heading tags automatically use Figtree ──── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), sans-serif;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+h1 { font-size: 2rem;    line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+h2 { font-size: 1.5rem;  line-height: 1.4; letter-spacing: -0.01em; margin-bottom: 1.25rem; }
+h3 { font-size: 1.125rem;line-height: 1.4; margin-bottom: 1rem; font-weight: 600; }
+
+/* p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--text-body);
+} */
+
+/* ── Text color utilities ──── */
+.text-secondary { color: #6b7280; }
+
+/* ── Sidebar layout ─────────────────────────── */
+.sidebar-content {
+  padding-top: 60px;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile: adjust header and spacing */
+@media (max-width: 640px) {
+  .sidebar-content {
+    padding-top: 56px;
+  }
+}
+
+/* Tablet: adjust spacing */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .sidebar-content {
+    padding-top: 60px;
+  }
+}
+
+/* Desktop: sidebar pushes content */
+@media (min-width: 1024px) {
+  .sidebar-content {
+    margin-left: var(--sidebar-w);
+  }
+}
+
+/* ── Dark mode — semantic utility classes ─────── */
+html.dark body                          { background-color: var(--bg-page); }
+html.dark .dark-page                    { background-color: var(--bg-page) !important; }
+html.dark .dark-card                    { background-color: var(--bg-card) !important; border-color: var(--border) !important; }
+html.dark .dark-topbar                  { background-color: var(--bg-topbar) !important; border-color: var(--border) !important; }
+html.dark .dark-sidebar                 { background-color: var(--bg-sidebar) !important; }
+html.dark .dark-border                  { border-color: var(--border) !important; }
+html.dark .dark-text-primary            { color: var(--text-primary) !important; }
+html.dark .dark-text-body               { color: var(--text-body) !important; }
+html.dark .dark-text-muted              { color: var(--text-muted) !important; }
+
+/* ── Responsive: mobile sidebar overlay ──────── */
+@media (max-width: 1023px) {
+  aside.crm-sidebar {
+    transform: translateX(-100%);
+    width: 280px !important;
+    z-index: 70 !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease !important;
+  }
+  aside.crm-sidebar[data-mobile-open="true"] {
+    transform: translateX(0) !important;
+  }
+  .sidebar-content {
+    margin-left: 0 !important;
+  }
+}
+
+/* ── Responsive page content padding ─────────── */
+@media (max-width: 640px) {
+  main {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  h1 { font-size: 1.25rem; margin-bottom: 1rem; }
+  h2 { font-size: 1rem; margin-bottom: 0.75rem; }
+  h3 { font-size: 0.875rem; margin-bottom: 0.5rem; }
+
+  .text-h1 { font-size: 1.125rem; }
+  .text-h2 { font-size: 0.95rem; }
+  .text-label { font-size: 0.8rem; }
+  .text-body { font-size: 0.85rem; }
+  .text-caption { font-size: 0.75rem; }
+  .text-button { font-size: 0.8rem; }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  main {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.125rem; }
+}
+
+/* ── Mobile-friendly tables ─────────────────── */
+@media (max-width: 640px) {
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 0.5rem !important;
+  }
+}
+
+/* ── Mobile-friendly buttons ───────────────── */
+@media (max-width: 640px) {
+  button, .MuiButton-root {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    min-height: 32px;
+  }
+}
+
+/* ── Responsive containers ─────────────────── */
+@media (max-width: 640px) {
+  .rounded-2xl {
+    border-radius: 0.75rem;
+  }
+
+  .grid {
+    gap: 0.75rem;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .space-y-5 > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* ── Viewport width adjustments ───────────── */
+@media (max-width: 375px) {
+  h1 { font-size: 1rem; }
+  h2 { font-size: 0.875rem; }
+  main { padding: 1rem 0.75rem !important; }
+}
+
+/* ── Tablet optimizations ──────────────────── */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .grid-cols-1 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 1;
+  }
+}
+
+/* ── Slim scrollbar ─────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+html.dark ::-webkit-scrollbar-track { background: #18181B; }
+html.dark ::-webkit-scrollbar-thumb { background: #52525B; }
+html.dark ::-webkit-scrollbar-thumb:hover { background: #71717A; }
+
+/* ── Recharts ───────────────────────────────── */
+.recharts-tooltip-wrapper { outline: none !important; }
+
+/* ── Dark mode: Tailwind bg overrides ───────── */
+html.dark .bg-white,
+html.dark .bg-\[\#f9fbff\],
+html.dark .bg-\[\#FAFBFF\],
+html.dark .bg-\[\#fafcff\]          { background-color: #0A0A0A !important; }
+
+html.dark .bg-\[\#EFF6FF\]          { background-color: #000000 !important; }
+
+html.dark .bg-\[\#E3ECFC\],
+html.dark .bg-\[\#D0DEFA\]          { background-color: #0F0F0F !important; }
+
+html.dark .bg-slate-50              { background-color: #0A0A0A !important; }
+html.dark .bg-slate-100             { background-color: #0F0F0F !important; }
+
+/* ── Dark mode: hover bg overrides ──────────── */
+html.dark .hover\:bg-white:hover,
+html.dark .hover\:bg-\[\#f9fbff\]:hover,
+html.dark .hover\:bg-\[\#FAFBFF\]:hover,
+html.dark .hover\:bg-\[\#fafcff\]:hover  { background-color: #18181B !important; }
+
+html.dark .hover\:bg-\[\#EFF6FF\]:hover  { background-color: #0F0F0F !important; }
+
+html.dark .hover\:bg-\[\#E3ECFC\]:hover,
+html.dark .hover\:bg-\[\#D0DEFA\]:hover  { background-color: #262626 !important; }
+
+html.dark .hover\:bg-slate-50:hover  { background-color: #18181B !important; }
+html.dark .hover\:bg-slate-100:hover { background-color: #262626 !important; }
+
+/* ── Dark mode: text overrides ──────────────── */
+html.dark .text-\[\#0C2472\]         { color: #FFFFFF !important; }
+html.dark .text-\[\#1D4ED8\]         { color: #D4D4D8 !important; }
+html.dark .text-slate-900            { color: #FFFFFF !important; }
+html.dark .text-slate-800            { color: #D4D4D8 !important; }
+html.dark .text-slate-700            { color: #D4D4D8 !important; }
+html.dark .text-slate-600            { color: #A1A1AA !important; }
+html.dark .text-slate-500            { color: #A1A1AA !important; }
+html.dark .text-slate-400            { color: #9CA3AF !important; }
+html.dark .text-slate-300            { color: #71717A !important; }
+html.dark .text-slate-200            { color: #3F3F46 !important; }
+
+html.dark .text-\[\#4A7AE8\]              { color: #D4D4D8 !important; }
+html.dark .hover\:text-\[\#0C2472\]:hover { color: #FFFFFF !important; }
+html.dark .hover\:text-\[\#1D4ED8\]:hover { color: #FFFFFF !important; }
+html.dark .hover\:text-\[\#4A7AE8\]:hover { color: #FAFAFA !important; }
+html.dark .hover\:text-slate-900:hover    { color: #FFFFFF !important; }
+
+/* ── Dark mode: border overrides ────────────── */
+html.dark .border-\[\#E3ECFC\],
+html.dark .border-\[\#D0DEFA\],
+html.dark .border-\[\#EFF6FF\]       { border-color: #27272A !important; }
+html.dark .border-white              { border-color: #27272A !important; }
+html.dark .border-slate-100          { border-color: #27272A !important; }
+html.dark .border-slate-200          { border-color: #27272A !important; }
+html.dark .divide-\[\#E3ECFC\] > * + *,
+html.dark .divide-\[\#EFF6FF\] > * + * { border-color: #27272A !important; }
+html.dark .divide-slate-100 > * + *  { border-color: #27272A !important; }
+
+html.dark .hover\:border-\[\#E3ECFC\]:hover { border-color: #3F3F46 !important; }
+
+/* ── Dark mode: blue → neutral overrides ─────── */
+html.dark .bg-\[\#0C2472\]              { background-color: #18181B !important; }
+html.dark .bg-\[\#1D4ED8\]              { background-color: #27272A !important; }
+html.dark .bg-\[\#3B82F6\]              { background-color: #3F3F46 !important; }
+html.dark .bg-\[\#172554\]              { background-color: #000000 !important; }
+html.dark .hover\:bg-\[\#1D4ED8\]:hover { background-color: #27272A !important; }
+html.dark .hover\:bg-\[\#3B82F6\]:hover { background-color: #3F3F46 !important; }
+
+/* ── Dark mode: colored utility overrides ────── */
+html.dark .bg-emerald-50               { background-color: rgba(16,185,129,0.08) !important; }
+html.dark .hover\:bg-emerald-100:hover { background-color: rgba(16,185,129,0.12) !important; }
+html.dark .bg-red-50                   { background-color: rgba(239,68,68,0.08) !important; }
+html.dark .hover\:bg-red-100:hover     { background-color: rgba(239,68,68,0.12) !important; }
+html.dark .bg-amber-50                 { background-color: rgba(245,158,11,0.08) !important; }
+html.dark .bg-blue-50                  { background-color: #0A0A0A !important; }
+html.dark .text-emerald-600            { color: #34D399 !important; }
+html.dark .text-red-600                { color: #F87171 !important; }
+html.dark .text-amber-600              { color: #FBBF24 !important; }
+html.dark .text-blue-600               { color: #D4D4D8 !important; }
+
+/* ── Dark mode: MUI overrides via CSS ────────── */
+html.dark .MuiPaper-root:not([class*="MuiBadge"]) {
+  background-color: #0A0A0A !important;
+  border-color: #27272A !important;
+  color: #D4D4D8 !important;
+}
+html.dark .MuiTableCell-root         { background-color: #0A0A0A !important; color: #D4D4D8 !important; border-color: #27272A !important; }
+html.dark .MuiTableCell-head         { background-color: #000000 !important; color: #FFFFFF !important; }
+html.dark .MuiInputBase-root         { color: #D4D4D8 !important; }
+html.dark .MuiOutlinedInput-root     { background-color: #0A0A0A !important; }
+html.dark .MuiSelect-select          { background-color: #0A0A0A !important; color: #D4D4D8 !important; }
+html.dark .MuiMenuItem-root          { color: #D4D4D8 !important; background-color: #0F0F0F !important; }
+html.dark .MuiMenuItem-root:hover    { background-color: #262626 !important; }
+html.dark .MuiChip-root              { background-color: #262626 !important; color: #A1A1AA !important; }
+html.dark .MuiDrawer-paper           { background-color: #0A0A0A !important; border-color: #27272A !important; }
+html.dark .MuiTableRow-root:hover .MuiTableCell-root { background-color: rgba(255,255,255,0.04) !important; }
+html.dark .MuiListItemText-primary   { color: #D4D4D8 !important; }
+html.dark .MuiInputLabel-root        { color: #A1A1AA !important; }
+html.dark .MuiFormLabel-root         { color: #A1A1AA !important; }
+html.dark .MuiTypography-root        { color: #D4D4D8; }
+
+/* MUI Buttons */
+html.dark .MuiButton-contained,
+html.dark .MuiButton-containedPrimary {
+  background-color: #18181B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.6) !important;
+}
+html.dark .MuiButton-contained:hover,
+html.dark .MuiButton-containedPrimary:hover {
+  background-color: #27272A !important;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.7) !important;
+}
+
+html.dark .MuiButton-outlined,
+html.dark .MuiButton-outlinedPrimary {
+  background-color: #0F0F0F !important;
+  border-color: #27272A !important;
+  color: #D4D4D8 !important;
+}
+html.dark .MuiButton-outlined:hover,
+html.dark .MuiButton-outlinedPrimary:hover {
+  background-color: #0A0A0A !important;
+  border-color: #A1A1AA !important;
+  color: #FFFFFF !important;
+}
+html.dark .MuiButton-text,
+html.dark .MuiButton-textPrimary {
+  color: #D4D4D8 !important;
+}
+html.dark .MuiButton-text:hover,
+html.dark .MuiButton-textPrimary:hover {
+  background-color: #262626 !important;
+  color: #FFFFFF !important;
+}
+
+/* MUI IconButton */
+html.dark .MuiIconButton-root { color: #A1A1AA !important; }
+html.dark .MuiIconButton-root:hover { background-color: #262626 !important; }
+
+/* Checkbox */
+html.dark .MuiCheckbox-root:not(.Mui-checked)         { color: #3F3F46 !important; }
+html.dark .MuiCheckbox-root.Mui-checked               { color: #D4D4D8 !important; }
+html.dark .MuiCheckbox-root.MuiCheckbox-indeterminate { color: #D4D4D8 !important; }
+
+/* List items */
+html.dark .MuiListItem-root { color: #D4D4D8 !important; }
+html.dark .MuiList-root     { background-color: #0A0A0A !important; }
+
+/* Popover / Menu */
+html.dark .MuiPopover-paper,
+html.dark .MuiMenu-paper {
+  background-color: #0F0F0F !important;
+  border: 1px solid #27272A !important;
+}
+
+/* TextField */
+html.dark .MuiTextField-root .MuiInputBase-root               { background-color: #0A0A0A !important; }
+html.dark .MuiTextField-root .MuiOutlinedInput-notchedOutline { border-color: #27272A !important; }
+html.dark .MuiTextField-root input,
+html.dark .MuiTextField-root textarea                         { color: #D4D4D8 !important; }
