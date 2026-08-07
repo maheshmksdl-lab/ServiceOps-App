@@ -7,7 +7,7 @@ import Tooltip from "@mui/material/Tooltip";
 import {
   SquaresFourIcon, LightningIcon, HandshakeIcon, AddressBookIcon,
   BuildingsIcon, CheckCircleIcon, ChatTeardropTextIcon, ChartBarIcon,
-  GearSixIcon, XIcon,
+  GearSixIcon, XIcon, WrenchIcon,
 } from "@phosphor-icons/react";
 import { OWNER_AVATARS } from "@/lib/avatars";
 import { useTheme } from "@/components/ThemeContext";
@@ -16,6 +16,7 @@ const MOBILE_BP = 1024;
 
 const navItems = [
   { label: "Dashboard",      Icon: SquaresFourIcon,      href: "/"         },
+  { label: "Jobs",           Icon: WrenchIcon,           href: "/jobs"     },
   { label: "Contacts",       Icon: AddressBookIcon,      href: "/contacts" },
   { label: "Customers",      Icon: BuildingsIcon,        href: "/accounts" },
   { label: "Tasks",          Icon: CheckCircleIcon,      href: "/tasks",   badge: 7  },

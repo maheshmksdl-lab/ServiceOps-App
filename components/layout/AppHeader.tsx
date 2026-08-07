@@ -19,6 +19,7 @@ const MOBILE_BP = 1024;
 
 const PATH_TITLES: Record<string, string> = {
   "/":         "Dashboard",
+  "/jobs":     "Jobs",
   "/leads":    "Leads",
   "/deals":    "Deals",
   "/contacts": "Contacts",
