@@ -53,7 +53,7 @@ export default function KPICard({
     <div
       className="rounded-xl sm:rounded-2xl p-4 sm:p-6 relative overflow-hidden border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-default"
       style={{
-        backgroundColor: isDark ? "#21160D" : fill,
+        backgroundColor: isDark ? "var(--bg-card)" : fill,
         borderColor: isDark ? "#4B2F1C" : "rgba(245,158,11,0.2)",
         boxShadow: isDark ? "0 6px 24px rgba(0,0,0,0.24)" : "0 6px 24px rgba(120,53,15,0.08)",
       }}
@@ -76,7 +76,7 @@ export default function KPICard({
 
         {/* ── Right: icon + sparkline ── */}
         <div className="flex flex-col items-end gap-3 flex-shrink-0">
-          <div className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-sm sm:text-base ${isDark ? "bg-[#2D180D] text-[#FBBF24]" : "bg-[#FFFBEB] text-[#78350F]"}`}>
+          <div className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-sm sm:text-base ${isDark ? "bg-[#22160D] text-[#FBBF24]" : "bg-[#FFFBEB] text-[#78350F]"}`}>
             {icon}
           </div>
 

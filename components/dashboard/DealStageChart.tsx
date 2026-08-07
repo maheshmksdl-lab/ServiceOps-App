@@ -49,7 +49,7 @@ export default function DealStageChart({ isDark = false }: { isDark?: boolean })
   return (
     <div className="rounded-2xl p-6 border h-full backdrop-blur-xl transition-colors duration-300"
       style={{
-        backgroundColor: "#ffffff",
+        backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
         borderColor: isDark ? "#4B2F1C" : "rgba(245,158,11,0.2)",
         boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
       }}>

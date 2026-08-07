@@ -211,7 +211,7 @@ export default function Sidebar() {
       style={{
         top: "72px",
         height: "calc(100vh - 72px)",
-        backgroundColor: isDark ? "var(--serviceops-surface)" : "var(--serviceops-surface)",
+        backgroundColor: isDark ? "var(--bg-sidebar)" : "var(--serviceops-surface)",
         width: collapsed ? "68px" : "260px",
         transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, border-color 0.2s ease",
       }}

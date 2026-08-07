@@ -45,7 +45,7 @@ export default function TopBar({ title }: { title?: string }) {
   });
 
   return (
-    <header className={`sticky top-0 z-40 border-b px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 lg:py-6 h-auto flex items-center gap-2 sm:gap-3 lg:gap-8 transition-colors duration-300 ${isDark ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)]"}`}>
+    <header className={`sticky top-0 z-40 border-b px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 lg:py-6 h-auto flex items-center gap-2 sm:gap-3 lg:gap-8 transition-colors duration-300 ${isDark ? "bg-[var(--bg-topbar)] border-[var(--border-soft)]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)]"}`}>
 
       {/* Mobile hamburger - hidden on desktop */}
       <button

@@ -81,10 +81,10 @@ const kpis = [
 
 /* ─────────── Quick-stat pills for the banner ─────────── */
 const quickStats = [
-  { label: "Tasks due today",      value: "7",   icon: ClipboardText,  color: "bg-white/20 text-white"          },
-  { label: "Deals to follow up",  value: "3",   icon: Handshake,      color: "bg-white/20 text-white"          },
-  { label: "Meetings today",      value: "2",   icon: CalendarBlank,  color: "bg-white/20 text-white"          },
-  { label: "New leads this week", value: "+84", icon: TrendUp,        color: "bg-white/20 text-white"          },
+  { label: "Tasks due today",      value: "7",   icon: ClipboardText,  color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "Deals to follow up",  value: "3",   icon: Handshake,      color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "Meetings today",      value: "2",   icon: CalendarBlank,  color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "New leads this week", value: "+84", icon: TrendUp,        color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
 ];
 
 export default function DashboardPage() {
@@ -163,9 +163,9 @@ export default function DashboardPage() {
           {/* ═══════════════════════════════════════
               WELCOME BANNER
           ═══════════════════════════════════════ */}
-          <div className={`relative rounded-xl sm:rounded-2xl overflow-hidden ${isDark ? "bg-[#2D180D]" : "bg-[#78350F]"}`}>
+          <div className={`relative rounded-xl sm:rounded-2xl overflow-hidden ${isDark ? "bg-[var(--bg-card)]" : "bg-[#78350F]"}`}>
             {/* Decorative blobs - hidden on mobile */}
-            <div className="absolute -right-10 -top-10 w-52 h-52 rounded-full bg-white/5 pointer-events-none hidden sm:block" />
+            <div className="absolute -right-10 -top-10 w-52 h-52 rounded-full bg-white/10 pointer-events-none hidden sm:block" />
             <div className="absolute right-16 top-6 w-28 h-28 rounded-full bg-white/5 pointer-events-none hidden md:block" />
             <div className="absolute right-48 -bottom-8 w-36 h-36 rounded-full bg-white/5 pointer-events-none hidden lg:block" />
             <div className="absolute left-1/2 -bottom-4 w-20 h-20 rounded-full bg-white/5 pointer-events-none hidden md:block" />
@@ -177,8 +177,8 @@ export default function DashboardPage() {
                 <span className="text-white font-semibold">Saturday, 30 May 2026</span>
               </p>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {quickStats.map(({ label, value, icon: Icon, color }) => (
-                  <div key={label} className={`flex items-center gap-1.5 sm:gap-2 ${color} backdrop-blur-sm rounded-lg sm:rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-[12px] font-semibold`}>
+                {quickStats.map(({ label, value, icon: Icon, color, colorDark }) => (
+                  <div key={label} className={`flex items-center gap-1.5 sm:gap-2 ${isDark ? colorDark : color} backdrop-blur-sm rounded-lg sm:rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-[12px] font-semibold`}>
                     <Icon size={12} weight="duotone" />
                     <span className="font-bold">{value}</span>
                     <span className="font-medium opacity-80 hidden xs:inline">{label}</span>

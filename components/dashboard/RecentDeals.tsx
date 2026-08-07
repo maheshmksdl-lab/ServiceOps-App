@@ -40,12 +40,12 @@ export default function RecentDeals({ isDark = false }: { isDark?: boolean }) {
   return (
     <div className="rounded-xl sm:rounded-2xl border overflow-hidden backdrop-blur-xl transition-colors duration-300"
       style={{
-        backgroundColor: "#ffffff",
+        backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
         borderColor: isDark ? "#4B2F1C" : "rgba(245,158,11,0.2)",
         boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
       }}>
       <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4 sm:px-6 py-3 sm:py-3.5 border-b ${isDark ? "border-[#4B2F1C]" : "border-[#FDE68A]"}`}
-        style={{ backgroundColor: "#ffffff" }}>
+        style={{ backgroundColor: isDark ? "var(--bg-card)" : "#ffffff" }}>
         <div className="flex items-center gap-2 whitespace-nowrap">
           <h3 className={`text-sm sm:text-[14px] font-bold leading-none m-0 ${isDark ? "text-[#FFF3D6]" : "text-[#78350F]"}`}>Recent Deals</h3>
           <span className={`text-[11px] sm:text-[12px] leading-none ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>· 5 latest active deals</span>

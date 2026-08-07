@@ -53,13 +53,13 @@ html.dark {
   --serviceops-hover: #FDE68A;
   --serviceops-soft: #7C3D10;
   --serviceops-tint: #2D180D;
-  --serviceops-surface: #18110B;
+  --serviceops-surface: #0D0A07;
 
   --bg-page: var(--serviceops-surface);
-  --bg-card: #21160D;
+  --bg-card: #18110B;
   --bg-surface-2: #22160D;
-  --bg-sidebar: #120C07;
-  --bg-topbar: #21160D;
+  --bg-sidebar: #080605;
+  --bg-topbar: #15100A;
   --border-soft: #4B2F1C;
 
   --text-primary: #FFF3D6;
@@ -173,7 +173,7 @@ h3 { font-size: 1.125rem;line-height: 1.4; margin-bottom: 1rem; font-weight: 600
 }
 
 /* ── Dark mode — semantic utility classes ─────── */
-html.dark body                          { background-color: var(--bg-page); }
+html.dark body                          { background-color: #000000; }
 html.dark .dark-page                    { background-color: var(--bg-page) !important; }
 html.dark .dark-card                    { background-color: var(--bg-card) !important; border-color: var(--border) !important; }
 html.dark .dark-topbar                  { background-color: var(--bg-topbar) !important; border-color: var(--border) !important; }

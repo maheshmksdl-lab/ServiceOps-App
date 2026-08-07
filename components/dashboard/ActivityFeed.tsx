@@ -29,7 +29,7 @@ export default function ActivityFeed({ isDark = false }: { isDark?: boolean }) {
   return (
     <div className="rounded-xl sm:rounded-2xl p-4 sm:p-6 border h-full flex flex-col backdrop-blur-xl transition-colors duration-300"
       style={{
-        backgroundColor: "#ffffff",
+        backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
         borderColor: isDark ? "#4B2F1C" : "rgba(245,158,11,0.2)",
         boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
       }}>
