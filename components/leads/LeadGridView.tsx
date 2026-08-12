@@ -19,19 +19,19 @@ const avatarColor = (n: string) => AVATAR_PAL[n.split("").reduce((a, c) => a + c
 const initials    = (n: string) => { const p = n.trim().split(/\s+/); return p.length >= 2 ? (p[0][0] + p[1][0]).toUpperCase() : n.substring(0, 2).toUpperCase(); };
 
 const PASTELS = [
-  { fill: "#D6E4F9", deep: "#2F6FED" },
-  { fill: "#D0E5E0", deep: "#2E9E7B" },
-  { fill: "#FAE3D0", deep: "#E0883F" },
-  { fill: "#F5D9E1", deep: "#DB5E8C" },
-  { fill: "#D2DFF0", deep: "#5B6CB5" },
+  { fill: "var(--serviceops-tint)", deep: "var(--serviceops-primary)" },
+  { fill: "var(--serviceops-soft)", deep: "var(--serviceops-action)" },
+  { fill: "var(--serviceops-surface)", deep: "var(--serviceops-primary)" },
+  { fill: "var(--serviceops-tint)", deep: "var(--serviceops-depth)" },
+  { fill: "var(--serviceops-soft)", deep: "var(--serviceops-depth)" },
 ];
 
 const DARK_PASTELS = [
-  { fill: "#1E2235", deep: "#4F8EF7" },
-  { fill: "#1A2820", deep: "#34D399" },
-  { fill: "#2A1F18", deep: "#F59E0B" },
-  { fill: "#28181F", deep: "#F472B6" },
-  { fill: "#1B1E2D", deep: "#818CF8" },
+  { fill: "#1A1209", deep: "#FBBF24" },
+  { fill: "#2D180D", deep: "#F59E0B" },
+  { fill: "#21160D", deep: "#FCD34D" },
+  { fill: "#2D180D", deep: "#FBBF24" },
+  { fill: "#18110B", deep: "#FDE68A" },
 ];
 
 interface Props { leads: Lead[] }

@@ -54,7 +54,7 @@ export default function KPICard({
       className="rounded-xl sm:rounded-2xl p-4 sm:p-6 relative overflow-hidden border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-default"
       style={{
         backgroundColor: isDark ? "var(--bg-card)" : fill,
-        borderColor: isDark ? "#4B2F1C" : "rgba(245,158,11,0.2)",
+        borderColor: isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)",
         boxShadow: isDark ? "0 6px 24px rgba(0,0,0,0.24)" : "0 6px 24px rgba(120,53,15,0.08)",
       }}
     >

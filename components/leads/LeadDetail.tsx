@@ -415,10 +415,10 @@ export default function LeadDetail({ leadId }: { leadId: number }) {
                 {/* Quick Stats */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
-                    { label:"Lead Source", value:lead.leadSource||"—",    icon:TrendUp,   fill: isDark?"#1A2D4A":"#D6E4F9", deep: isDark?"#60A5FA":"#2F6FED" },
-                    { label:"Rating",      value:lead.rating||"—",        icon:Star,      fill: isDark?"#1A2D3A":"#D0E5E0", deep: isDark?"#34D399":"#2E9E7B" },
-                    { label:"Industry",    value:lead.industry||"—",      icon:Buildings, fill: isDark?"#2A1E10":"#FAE3D0", deep: isDark?"#FB923C":"#E0883F" },
-                    { label:"Employees",   value:lead.noOfEmployees||"—", icon:User,      fill: isDark?"#2A1828":"#F5D9E1", deep: isDark?"#F472B6":"#DB5E8C" },
+                    { label:"Lead Source", value:lead.leadSource||"—",    icon:TrendUp,   fill: isDark?"#1A1209":"var(--serviceops-tint)", deep: isDark?"#FBBF24":"var(--serviceops-primary)" },
+                    { label:"Rating",      value:lead.rating||"—",        icon:Star,      fill: isDark?"#2D180D":"var(--serviceops-soft)", deep: isDark?"#F59E0B":"var(--serviceops-action)" },
+                    { label:"Industry",    value:lead.industry||"—",      icon:Buildings, fill: isDark?"#21160D":"var(--serviceops-surface)", deep: isDark?"#FCD34D":"var(--serviceops-primary)" },
+                    { label:"Employees",   value:lead.noOfEmployees||"—", icon:User,      fill: isDark?"#2D180D":"var(--serviceops-tint)", deep: isDark?"#FBBF24":"var(--serviceops-depth)" },
                   ].map(({ label, value, icon: Icon, fill, deep }) => (
                     <div key={label} className="rounded-xl border border-white/50 p-3.5"
                       style={{ backgroundColor:fill, boxShadow:"0 6px 24px rgba(15,23,42,0.06)" }}>

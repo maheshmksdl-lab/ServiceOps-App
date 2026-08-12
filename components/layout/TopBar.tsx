@@ -69,7 +69,7 @@ export default function TopBar({ title }: { title?: string }) {
       </div>
 
       {/* Search - hidden on mobile, visible md+ */}
-      <div className={`hidden md:flex items-center gap-2 border rounded-xl px-2.5 sm:px-3 py-1.5 w-56 lg:w-60 group transition-all ${isDark ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_rgba(245,158,11,0.25)]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_rgba(245,158,11,0.2)]"}`}>
+      <div className={`hidden md:flex items-center gap-2 border rounded-xl px-2.5 sm:px-3 py-1.5 w-56 lg:w-60 group transition-all ${isDark ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"}`}>
         <MagnifyingGlass size={14} color={isDark ? "#9CA3AF" : "#737373"} weight="duotone" />
         <InputBase
           placeholder="Search leads, deals..."

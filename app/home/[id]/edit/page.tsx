@@ -155,10 +155,10 @@ const SAMPLE_CHART_DATA = [
 const SAMPLE_CHART_COLORS = ["#F59E0B", "#F59E0B", "#3B82F6"];
 
 const KPI_FILL: Record<string, { fill: string; accent: string }> = {
-  "kpi-accounts": { fill: "#D6E4F9", accent: "#2F6FED" },
-  "kpi-contacts": { fill: "#D0E5E0", accent: "#2E9E7B" },
-  "kpi-leads": { fill: "#FAE3D0", accent: "#E0883F" },
-  "kpi-deals": { fill: "#F5D9E1", accent: "#DB5E8C" },
+  "kpi-accounts": { fill: "var(--serviceops-tint)", accent: "var(--serviceops-primary)" },
+  "kpi-contacts": { fill: "var(--serviceops-soft)", accent: "var(--serviceops-action)" },
+  "kpi-leads": { fill: "var(--serviceops-surface)", accent: "var(--serviceops-primary)" },
+  "kpi-deals": { fill: "var(--serviceops-tint)", accent: "var(--serviceops-depth)" },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

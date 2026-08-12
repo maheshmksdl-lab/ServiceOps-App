@@ -16,14 +16,14 @@ interface Deal {
 }
 
 const STAGE_CFG: Record<DealStage, { fill: string; deep: string; darkFill: string; darkDeep: string }> = {
-  "Qualification":            { fill: "#D6E4F9", deep: "#2F6FED", darkFill: "#1E2235", darkDeep: "#4F8EF7" },
-  "Needs Analysis":           { fill: "#D0E5E0", deep: "#2E9E7B", darkFill: "#1A2820", darkDeep: "#34D399" },
-  "Value Proposition":        { fill: "#FAE3D0", deep: "#E0883F", darkFill: "#2A1F18", darkDeep: "#F59E0B" },
-  "Identify Decision Makers": { fill: "#F5D9E1", deep: "#DB5E8C", darkFill: "#28181F", darkDeep: "#F472B6" },
-  "Proposal/Price Quote":     { fill: "#D2DFF0", deep: "#5B6CB5", darkFill: "#1B1E2D", darkDeep: "#818CF8" },
-  "Negotiation/Review":       { fill: "#FAE3D0", deep: "#E0883F", darkFill: "#2A1F18", darkDeep: "#F59E0B" },
-  "Closed Won":               { fill: "#D0E5E0", deep: "#2E9E7B", darkFill: "#1A2820", darkDeep: "#34D399" },
-  "Closed Lost":              { fill: "#F5D9E1", deep: "#DB5E8C", darkFill: "#28181F", darkDeep: "#F472B6" },
+  "Qualification":            { fill: "var(--serviceops-tint)", deep: "var(--serviceops-primary)", darkFill: "#21160D", darkDeep: "#FBBF24" },
+  "Needs Analysis":           { fill: "var(--serviceops-soft)", deep: "var(--serviceops-action)", darkFill: "#2D180D", darkDeep: "#F59E0B" },
+  "Value Proposition":        { fill: "var(--serviceops-surface)", deep: "var(--serviceops-primary)", darkFill: "#1A1209", darkDeep: "#FCD34D" },
+  "Identify Decision Makers": { fill: "var(--serviceops-tint)", deep: "var(--serviceops-depth)", darkFill: "#2D180D", darkDeep: "#FBBF24" },
+  "Proposal/Price Quote":     { fill: "var(--serviceops-soft)", deep: "var(--serviceops-depth)", darkFill: "#18110B", darkDeep: "#FDE68A" },
+  "Negotiation/Review":       { fill: "var(--serviceops-surface)", deep: "var(--serviceops-primary)", darkFill: "#1A1209", darkDeep: "#FCD34D" },
+  "Closed Won":               { fill: "var(--serviceops-soft)", deep: "var(--serviceops-action)", darkFill: "#2D180D", darkDeep: "#F59E0B" },
+  "Closed Lost":              { fill: "var(--serviceops-tint)", deep: "var(--serviceops-depth)", darkFill: "#2D180D", darkDeep: "#FBBF24" },
 };
 
 const AVATAR_PAL = ["#7C3AED", "#10B981", "#F59E0B", "#DB2777"];

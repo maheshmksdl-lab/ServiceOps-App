@@ -89,10 +89,10 @@ function DropdownField({ label, value, options, onChange }: {
         sx={{
           justifyContent: "space-between", textTransform: "none", fontWeight: 500, fontSize: "13.5px",
           borderRadius: "10px", px: 1.5, py: 0.9, minWidth: 148,
-          border: `1px solid ${active ? "#1D4ED8" : isDark ? "#27272A" : "#E3ECFC"}`,
-          color: active ? "#1D4ED8" : isDark ? "#D4D4D8" : "#334155",
+          border: `1px solid ${active ? "var(--serviceops-primary)" : isDark ? "#27272A" : "var(--serviceops-soft)"}`,
+          color: active ? "var(--serviceops-primary)" : isDark ? "#D4D4D8" : "#334155",
           bgcolor: isDark ? "#0A0A0A" : "#fff",
-          "&:hover": { borderColor: "#1D4ED8", bgcolor: isDark ? "#0F0F0F" : "#F5F8FF" },
+          "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-tint)" },
         }}>
         <span className="flex flex-col items-start leading-tight">
           <span className={`text-[10px] font-medium ${isDark ? "text-[#71717A]" : "text-slate-400"}`}>{label}</span>
@@ -100,10 +100,10 @@ function DropdownField({ label, value, options, onChange }: {
         </span>
       </Button>
       <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}
-        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, boxShadow: isDark ? "0 8px 32px rgba(0,0,0,0.4)" : "0 8px 32px rgba(12,36,114,0.10)", minWidth: 190, maxHeight: 340 } }}>
+        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, boxShadow: isDark ? "0 8px 32px rgba(0,0,0,0.4)" : "0 8px 32px rgba(245,158,11,0.12)", minWidth: 190, maxHeight: 340 } }}>
         {options.map(opt => (
           <MenuItem key={opt} selected={opt === value} onClick={() => { onChange(opt); setAnchor(null); }}
-            sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "#EFF6FF", color: "#1D4ED8", fontWeight: 600 } }}>
+            sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)", color: "var(--serviceops-primary)", fontWeight: 600 } }}>
             {opt}
           </MenuItem>
         ))}
@@ -244,21 +244,21 @@ export default function JobsPage() {
             <div className={`flex items-center gap-1.5 text-[13.5px]/[18px] mb-1 ${isDark ? "text-[#E4E4E7]" : "text-slate-400"}`}>
               <House size={16} weight="duotone" />
               <CaretRight size={12} weight="duotone" />
-              <Link href="/jobs" className={`transition-colors font-medium ${isDark ? "hover:text-[#D4D4D8]" : "hover:text-[#1D4ED8]"}`}>Jobs</Link>
+              <Link href="/jobs" className={`transition-colors font-medium ${isDark ? "hover:text-[#D4D4D8]" : "hover:text-[var(--serviceops-primary)]"}`}>Jobs</Link>
             </div>
             <h1 className="font-heading text-lg sm:text-[22px]/[28px] font-semibold text-slate-900 tracking-tight m-0">Jobs</h1>
           </div>
 
           <Button variant="contained"
             startIcon={<Plus size={16} weight="bold" />}
-            sx={{ bgcolor: isDark ? "#27272A" : "#1D4ED8", color: isDark ? "#F4F4F5" : "white", borderRadius: "9px", textTransform: "none", fontWeight: 500, fontSize: "15px", px: 2.25, py: 0.85, boxShadow: isDark ? "none" : "0 1px 8px 0 #1D4ED833", "&:hover": { bgcolor: isDark ? "#3F3F46" : "#2563EB", boxShadow: isDark ? "none" : "0 2px 14px 0 #60A5FA55" }, "&:active": { bgcolor: isDark ? "#52525B" : "#0C2472" } }}>
+            sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: isDark ? "#F4F4F5" : "#3B1F00", borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "15px", px: 2.25, py: 0.85, boxShadow: isDark ? "none" : "0 1px 8px 0 rgba(245,158,11,0.35)", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-action)", boxShadow: isDark ? "none" : "0 2px 14px 0 rgba(245,158,11,0.38)" }, "&:active": { bgcolor: isDark ? "#52525B" : "var(--serviceops-hover)" } }}>
             Create Job
           </Button>
         </div>
 
         {/* -- Toolbar row 1: search + date + status + priority -- */}
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2.5">
-          <div className={`flex items-center gap-2 border rounded-xl px-3 py-2 flex-1 lg:w-80 focus-within:border-[#60A5FA] focus-within:border-2 focus-within:shadow-[0_0_0_2px_#60A5FA] transition-all ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-[#f9fbff] border-[#E3ECFC]"}`}>
+          <div className={`flex items-center gap-2 border rounded-xl px-3 py-2 flex-1 lg:w-80 focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-primary)] transition-all ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-[#f9fbff] border-[var(--serviceops-soft)]"}`}>
             <MagnifyingGlass size={15} color="#94A3B8" weight="duotone" />
             <InputBase placeholder="Search jobs, customer, technician…" value={search}
               onChange={e => applyFilter(() => setSearch(e.target.value))}
@@ -273,15 +273,15 @@ export default function JobsPage() {
               startIcon={<CalendarBlank size={14} weight="duotone" />}
               endIcon={<CaretDown size={11} weight="bold" />}
               sx={{ textTransform: "none", fontWeight: 500, fontSize: "13.5px", borderRadius: "10px", px: 1.5, py: 0.9,
-                border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0A0A0A" : "#fff",
-                "&:hover": { borderColor: "#1D4ED8", bgcolor: isDark ? "#0F0F0F" : "#F5F8FF" } }}>
+                border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0A0A0A" : "#fff",
+                "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-tint)" } }}>
               {dateRange}
             </Button>
             <Menu anchorEl={dateAnchor} open={Boolean(dateAnchor)} onClose={() => setDateAnchor(null)}
-              PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, minWidth: 190 } }}>
+              PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, minWidth: 190 } }}>
               {DATE_PRESETS.map(opt => (
                 <MenuItem key={opt} selected={opt === dateRange} onClick={() => { setDateRange(opt); setDateAnchor(null); }}
-                  sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "#EFF6FF", color: "#1D4ED8", fontWeight: 600 } }}>
+                  sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)", color: "var(--serviceops-primary)", fontWeight: 600 } }}>
                   {opt}
                 </MenuItem>
               ))}
@@ -304,13 +304,13 @@ export default function JobsPage() {
             onClick={e => setFiltersAnchor(e.currentTarget)}
             sx={{
               ml: { sm: "auto" },
-              borderColor: activeFilters.length > 0 ? "#1D4ED8" : isDark ? "#27272A" : "#E3ECFC",
-              color: activeFilters.length > 0 ? "#fff" : isDark ? "#E4E4E7" : "#0C2472",
-              bgcolor: activeFilters.length > 0 ? "#1D4ED8" : isDark ? "#0F0F0F" : "#E3ECFC",
-              borderRadius: "9px", textTransform: "none", fontWeight: 500, fontSize: "14px",
+              borderColor: activeFilters.length > 0 ? "var(--serviceops-primary)" : isDark ? "#27272A" : "var(--serviceops-soft)",
+              color: activeFilters.length > 0 ? "#3B1F00" : isDark ? "#E4E4E7" : "#3B1F00",
+              bgcolor: activeFilters.length > 0 ? "var(--serviceops-primary)" : isDark ? "#0F0F0F" : "var(--serviceops-tint)",
+              borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "14px",
               "&:hover": {
-                borderColor: activeFilters.length > 0 ? "#1640B8" : "#1D4ED8",
-                bgcolor: activeFilters.length > 0 ? "#1640B8" : isDark ? "#0A0A0A" : "#DCE6FB",
+                borderColor: activeFilters.length > 0 ? "var(--serviceops-action)" : "var(--serviceops-primary)",
+                bgcolor: activeFilters.length > 0 ? "var(--serviceops-action)" : isDark ? "#0A0A0A" : "var(--serviceops-soft)",
               },
             }}>
             Filters{activeFilters.length > 0 ? ` (${activeFilters.length})` : ""}
@@ -319,27 +319,27 @@ export default function JobsPage() {
 
         {/* -- KPI stat cards -- */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          <MetricCard title="Total Jobs" value={kpis.total.toLocaleString()} icon={<ClipboardText size={18} weight="duotone" />} fill="#EAF2FC" accent="#2a78d6" isDark={isDark} />
-          <MetricCard title="Open Jobs" value={kpis.open} icon={<FolderOpen size={18} weight="duotone" />} fill="#FDECE4" accent="#c2540f" isDark={isDark} />
-          <MetricCard title="In Progress" value={kpis.inProgress} icon={<Hourglass size={18} weight="duotone" />} fill="#F3ECFB" accent="#4a3aa7" isDark={isDark} />
-          <MetricCard title="Completed" value={kpis.completed.toLocaleString()} icon={<CheckCircle size={18} weight="duotone" />} fill="#E4F5E4" accent="#008300" isDark={isDark} />
-          <MetricCard title="SLA Breached" value={kpis.slaBreached} icon={<WarningCircle size={18} weight="duotone" />} fill="#FCEAEA" accent="#d03b3b" isDark={isDark} />
+          <MetricCard title="Total Jobs" value={kpis.total.toLocaleString()} icon={<ClipboardText size={18} weight="duotone" />} fill="var(--serviceops-tint)" accent="var(--serviceops-primary)" isDark={isDark} />
+          <MetricCard title="Open Jobs" value={kpis.open} icon={<FolderOpen size={18} weight="duotone" />} fill="var(--serviceops-surface)" accent="var(--serviceops-action)" isDark={isDark} />
+          <MetricCard title="In Progress" value={kpis.inProgress} icon={<Hourglass size={18} weight="duotone" />} fill="var(--serviceops-soft)" accent="var(--serviceops-depth)" isDark={isDark} />
+          <MetricCard title="Completed" value={kpis.completed.toLocaleString()} icon={<CheckCircle size={18} weight="duotone" />} fill="var(--serviceops-tint)" accent="var(--serviceops-primary)" isDark={isDark} />
+          <MetricCard title="SLA Breached" value={kpis.slaBreached} icon={<WarningCircle size={18} weight="duotone" />} fill="var(--serviceops-surface)" accent="var(--serviceops-depth)" isDark={isDark} />
         </div>
 
         {/* -- Job List card -- */}
-        <div className={`rounded-2xl border shadow-sm overflow-hidden ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[#E3ECFC]"}`}>
-          <div className={`flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 border-b flex-wrap ${isDark ? "border-[#27272A]" : "border-[#EFF6FF]"}`}>
+        <div className={`rounded-2xl border shadow-sm overflow-hidden ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
+          <div className={`flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 border-b flex-wrap ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-tint)]"}`}>
             <p className={`font-heading text-[15px] font-semibold m-0 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>
               Job List <span className={isDark ? "text-[#71717A]" : "text-slate-400"}>({filtered.length})</span>
             </p>
             <div className="flex items-center gap-2">
               <Button variant="outlined" size="small" startIcon={<ExportIcon size={14} weight="duotone" />}
-                sx={{ borderColor: isDark ? "#27272A" : "#E3ECFC", color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0F0F0F" : "#fff", borderRadius: "9px", textTransform: "none", fontWeight: 500, fontSize: "13.5px", "&:hover": { borderColor: "#1D4ED8", bgcolor: isDark ? "#0A0A0A" : "#F5F8FF" } }}>
+                sx={{ borderColor: isDark ? "#27272A" : "var(--serviceops-soft)", color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0F0F0F" : "#fff", borderRadius: "9px", textTransform: "none", fontWeight: 500, fontSize: "13.5px", "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0A0A0A" : "var(--serviceops-tint)" } }}>
                 Export
               </Button>
               <Button variant="contained" size="small" disabled={selected.size === 0}
                 onClick={e => setBulkAnchor(e.currentTarget)}
-                sx={{ bgcolor: isDark ? "#27272A" : "#1D4ED8", color: "#fff", borderRadius: "9px", textTransform: "none", fontWeight: 500, fontSize: "13.5px", boxShadow: "none", "&:hover": { bgcolor: isDark ? "#3F3F46" : "#2563EB" }, "&.Mui-disabled": { bgcolor: isDark ? "#18181B" : "#EFF6FF", color: isDark ? "#52525B" : "#94A3B8" } }}>
+                sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: "#3B1F00", borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "13.5px", boxShadow: "none", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-action)" }, "&.Mui-disabled": { bgcolor: isDark ? "#18181B" : "var(--serviceops-tint)", color: isDark ? "#52525B" : "#94A3B8" } }}>
                 Bulk Actions{selected.size > 0 ? ` (${selected.size})` : ""}
               </Button>
             </div>
@@ -349,11 +349,11 @@ export default function JobsPage() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse min-w-[880px]">
               <thead>
-                <tr className={isDark ? "bg-[#18181B]" : "bg-[#E3ECFC]"}>
+                <tr className={isDark ? "bg-[#18181B]" : "bg-[var(--serviceops-soft)]"}>
                   <th className="w-10 pl-4 py-2.5">
                     <Checkbox size="small" checked={allPageSelected} indeterminate={somePageSelected && !allPageSelected}
                       onChange={toggleAllOnPage}
-                      sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#CBD5E1", "&.Mui-checked, &.MuiCheckbox-indeterminate": { color: "#1D4ED8" } }} />
+                      sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#CBD5E1", "&.Mui-checked, &.MuiCheckbox-indeterminate": { color: "var(--serviceops-primary)" } }} />
                   </th>
                   {["Job ID", "Customer", "Service Type", "Technician", "Priority", "Status", "ETA / SLA", ""].map(h => (
                     <th key={h} className={`text-left px-3 py-2.5 font-heading text-[12px] font-semibold uppercase tracking-wide whitespace-nowrap ${isDark ? "text-[#E4E4E7]" : "text-[#737373]"}`}>{h}</th>
@@ -366,14 +366,14 @@ export default function JobsPage() {
                   const svcColor = isDark ? SERVICE_TYPE_META[job.serviceType].dark : SERVICE_TYPE_META[job.serviceType].light;
                   return (
                     <tr key={job.id} onClick={() => router.push(`/jobs/${job.id}`)}
-                      className={`cursor-pointer border-t transition-colors group ${isDark ? "border-[#18181B] hover:bg-[#0F0F0F]" : "border-[#EFF6FF] hover:bg-[rgba(96,165,250,0.04)]"} ${selected.has(job.id) ? (isDark ? "bg-[#18181B]" : "bg-[#EFF6FF]") : ""}`}>
+                      className={`cursor-pointer border-t transition-colors group ${isDark ? "border-[#18181B] hover:bg-[#0F0F0F]" : "border-[var(--serviceops-tint)] hover:bg-[rgba(245,158,11,0.06)]"} ${selected.has(job.id) ? (isDark ? "bg-[#18181B]" : "bg-[rgba(245,158,11,0.08)]") : ""}`}>
                       <td className="pl-4 py-2.5" onClick={e => e.stopPropagation()}>
                         <Checkbox size="small" checked={selected.has(job.id)} onChange={() => toggleRow(job.id)}
-                          sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#CBD5E1", "&.Mui-checked": { color: "#1D4ED8" } }} />
+                          sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#CBD5E1", "&.Mui-checked": { color: "var(--serviceops-primary)" } }} />
                       </td>
                       <td className="px-3 py-2.5">
                         <Link href={`/jobs/${job.id}`} onClick={e => e.stopPropagation()}
-                          className={`font-heading text-[14px] font-semibold hover:underline whitespace-nowrap ${isDark ? "text-[#60A5FA]" : "text-[#1D4ED8]"}`}>
+                          className={`font-heading text-[14px] font-semibold hover:underline whitespace-nowrap ${isDark ? "text-[var(--serviceops-primary)]" : "text-[var(--serviceops-primary)]"}`}>
                           {job.jobId}
                         </Link>
                       </td>
@@ -403,13 +403,13 @@ export default function JobsPage() {
                         <div className="flex items-center justify-end gap-0.5 w-full opacity-0 group-hover:opacity-100 transition-opacity">
                           <Tooltip title="View">
                             <IconButton size="small" onClick={() => router.push(`/jobs/${job.id}`)}
-                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "#E3ECFC" } }}>
+                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)" } }}>
                               <Eye size={15} color="#94A3B8" weight="duotone" />
                             </IconButton>
                           </Tooltip>
                           <Tooltip title="Actions">
                             <IconButton size="small" onClick={e => setRowMenu({ anchor: e.currentTarget, id: job.id })}
-                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "#E3ECFC" } }}>
+                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)" } }}>
                               <DotsThreeVertical size={15} color="#94A3B8" weight="duotone" />
                             </IconButton>
                           </Tooltip>
@@ -434,13 +434,13 @@ export default function JobsPage() {
           </div>
 
           {/* -- Pagination footer -- */}
-          <div className={`flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t ${isDark ? "border-[#27272A]" : "border-[#EFF6FF]"}`}>
+          <div className={`flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-tint)]"}`}>
             <p className={`m-0 text-[12.5px] ${isDark ? "text-[#71717A]" : "text-slate-400"}`}>
               {filtered.length === 0 ? "No entries" : `Showing ${(safePage - 1) * PAGE_SIZE + 1} to ${Math.min(safePage * PAGE_SIZE, filtered.length)} of ${filtered.length} entries`}
             </p>
             <div className="flex items-center gap-1">
               <IconButton size="small" disabled={safePage === 1} onClick={() => setPage(p => Math.max(1, p - 1))}
-                sx={{ borderRadius: "8px", p: 0.7, border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}` }}>
+                sx={{ borderRadius: "8px", p: 0.7, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}` }}>
                 <ArrowLeft size={13} weight="bold" />
               </IconButton>
               {pageList(safePage, totalPages).map((p, i) => p === "…" ? (
@@ -449,14 +449,14 @@ export default function JobsPage() {
                 <button key={p} onClick={() => setPage(p)}
                   className={`min-w-[28px] h-7 px-1.5 rounded-lg text-[12.5px] font-medium transition-colors ${
                     p === safePage
-                      ? "bg-[#1D4ED8] text-white"
-                      : isDark ? "text-[#D4D4D8] hover:bg-[#27272A]" : "text-slate-600 hover:bg-[#EFF6FF]"
+                      ? "bg-[var(--serviceops-primary)] text-[#3B1F00]"
+                      : isDark ? "text-[#D4D4D8] hover:bg-[#27272A]" : "text-slate-600 hover:bg-[var(--serviceops-tint)]"
                   }`}>
                   {p}
                 </button>
               ))}
               <IconButton size="small" disabled={safePage === totalPages} onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                sx={{ borderRadius: "8px", p: 0.7, border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}` }}>
+                sx={{ borderRadius: "8px", p: 0.7, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}` }}>
                 <ArrowRight size={13} weight="bold" />
               </IconButton>
             </div>
@@ -466,7 +466,7 @@ export default function JobsPage() {
         {/* -- Charts row -- */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Jobs by Status */}
-          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[#E3ECFC]"}`}>
+          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
             <p className={`font-heading text-[14px] font-bold mb-4 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>Jobs by Status</p>
             <div className="flex items-center gap-4">
               <div className="relative w-[132px] h-[132px] flex-shrink-0">
@@ -478,7 +478,7 @@ export default function JobsPage() {
                       ))}
                     </Pie>
                     <RTooltip formatter={(v: number, n: string) => [`${v} jobs`, n]}
-                      contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} />
+                      contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} />
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
@@ -500,13 +500,13 @@ export default function JobsPage() {
           </div>
 
           {/* Jobs by Service Type */}
-          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[#E3ECFC]"}`}>
+          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
             <p className={`font-heading text-[14px] font-bold mb-2 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>Jobs by Service Type</p>
             <ResponsiveContainer width="100%" height={216}>
               <BarChart data={serviceChartData} layout="vertical" margin={{ top: 0, right: 28, left: 0, bottom: 0 }} barSize={12}>
                 <XAxis type="number" hide />
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: isDark ? "#A1A1AA" : "#64748B", fontWeight: 500 }} axisLine={false} tickLine={false} width={110} />
-                <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ fill: isDark ? "#18181B" : "#F5F8FF" }} />
+                <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ fill: isDark ? "#18181B" : "var(--serviceops-tint)" }} />
                 <Bar dataKey="value" radius={[0, 6, 6, 0]}>
                   <LabelList dataKey="value" position="right" style={{ fontSize: 10.5, fontWeight: 600, fill: isDark ? "#A1A1AA" : "#64748B" }} />
                   {serviceChartData.map(d => (
@@ -518,15 +518,15 @@ export default function JobsPage() {
           </div>
 
           {/* Jobs Trend */}
-          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[#E3ECFC]"}`}>
+          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
             <p className={`font-heading text-[14px] font-bold mb-2 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>Jobs Trend (This Week)</p>
             <ResponsiveContainer width="100%" height={216}>
               <LineChart data={trendData} margin={{ top: 10, right: 8, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#27272A" : "#EFF6FF"} vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#27272A" : "var(--serviceops-soft)"} vertical={false} />
                 <XAxis dataKey="day" tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#94A3B8" }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#94A3B8" }} axisLine={false} tickLine={false} width={30} />
-                <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ stroke: "#1D4ED8", strokeWidth: 1, strokeDasharray: "4 3" }} />
-                <Line type="monotone" dataKey="jobs" stroke="#1D4ED8" strokeWidth={2.5} dot={{ r: 3, fill: "#1D4ED8" }} activeDot={{ r: 5 }} />
+                <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ stroke: "var(--serviceops-primary)", strokeWidth: 1, strokeDasharray: "4 3" }} />
+                <Line type="monotone" dataKey="jobs" stroke="var(--serviceops-primary)" strokeWidth={2.5} dot={{ r: 3, fill: "var(--serviceops-primary)" }} activeDot={{ r: 5 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -536,7 +536,7 @@ export default function JobsPage() {
 
       {/* -- Row actions menu -- */}
       <Menu anchorEl={rowMenu?.anchor ?? null} open={Boolean(rowMenu)} onClose={() => setRowMenu(null)}
-        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, minWidth: 190 } }}>
+        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, minWidth: 190 } }}>
         <MenuItem onClick={() => { const id = rowMenu?.id; setRowMenu(null); if (id) router.push(`/jobs/${id}`); }}
           sx={{ mx: 0.5, borderRadius: "8px", py: 0.9 }}>
           <ListItemIcon sx={{ minWidth: 30 }}><Eye size={15} weight="duotone" /></ListItemIcon>
@@ -550,7 +550,7 @@ export default function JobsPage() {
           <ListItemIcon sx={{ minWidth: 30 }}><PencilSimple size={15} weight="duotone" /></ListItemIcon>
           <ListItemText primaryTypographyProps={{ fontSize: "13.5px" }}>Change Status</ListItemText>
         </MenuItem>
-        <Divider sx={{ my: 0.5, borderColor: isDark ? "#27272A" : "#E3ECFC" }} />
+        <Divider sx={{ my: 0.5, borderColor: isDark ? "#27272A" : "var(--serviceops-soft)" }} />
         <MenuItem onClick={() => setRowMenu(null)} sx={{ mx: 0.5, borderRadius: "8px", py: 0.9, color: "#EF4444" }}>
           <ListItemIcon sx={{ minWidth: 30 }}><XCircle size={15} color="#EF4444" weight="duotone" /></ListItemIcon>
           <ListItemText primaryTypographyProps={{ fontSize: "13.5px", color: "#EF4444" }}>Cancel Job</ListItemText>
@@ -559,7 +559,7 @@ export default function JobsPage() {
 
       {/* -- Bulk actions menu -- */}
       <Menu anchorEl={bulkAnchor} open={Boolean(bulkAnchor) && selected.size > 0} onClose={() => setBulkAnchor(null)}
-        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, minWidth: 200 } }}>
+        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, minWidth: 200 } }}>
         <MenuItem onClick={() => setBulkAnchor(null)} sx={{ mx: 0.5, borderRadius: "8px", py: 0.9 }}>
           <ListItemIcon sx={{ minWidth: 30 }}><UserSwitch size={15} weight="duotone" /></ListItemIcon>
           <ListItemText primaryTypographyProps={{ fontSize: "13.5px" }}>Assign Technician</ListItemText>

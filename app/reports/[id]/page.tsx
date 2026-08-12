@@ -1208,10 +1208,10 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
 
             {/* Summary metric cards — matches Dashboard KPI row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              <MetricCard title="Total Records" value={totalRecords} icon={<Rows size={18} weight="duotone" />} fill="#D6E4F9" accent="#2F6FED" isDark={isDark} />
-              <MetricCard title="Total Deal Amount" value={`₹${(totalAmount / 1000).toFixed(0)}k`} icon={<Handshake size={18} weight="duotone" />} fill="#FAE3D0" accent="#E0883F" isDark={isDark} />
-              <MetricCard title="Avg. Probability" value={`${avgProbability}%`} icon={<TrendUp size={18} weight="duotone" />} fill="#D0E5E0" accent="#2E9E7B" isDark={isDark} />
-              <MetricCard title="Contacts Involved" value={new Set(TABLE_DATA.map(r => r.contactName).filter(Boolean)).size} icon={<Users size={18} weight="duotone" />} fill="#F5D9E1" accent="#DB5E8C" isDark={isDark} />
+              <MetricCard title="Total Records" value={totalRecords} icon={<Rows size={18} weight="duotone" />} fill="var(--serviceops-tint)" accent="var(--serviceops-primary)" isDark={isDark} />
+              <MetricCard title="Total Deal Amount" value={`₹${(totalAmount / 1000).toFixed(0)}k`} icon={<Handshake size={18} weight="duotone" />} fill="var(--serviceops-surface)" accent="var(--serviceops-primary)" isDark={isDark} />
+              <MetricCard title="Avg. Probability" value={`${avgProbability}%`} icon={<TrendUp size={18} weight="duotone" />} fill="var(--serviceops-soft)" accent="var(--serviceops-action)" isDark={isDark} />
+              <MetricCard title="Contacts Involved" value={new Set(TABLE_DATA.map(r => r.contactName).filter(Boolean)).size} icon={<Users size={18} weight="duotone" />} fill="var(--serviceops-tint)" accent="var(--serviceops-depth)" isDark={isDark} />
             </div>
 
             {/* Charts Grid */}

@@ -287,8 +287,8 @@ export default function AppHeader() {
         {/* Search */}
         <div className={`flex items-center gap-2 border rounded-xl px-3 py-1.5 w-60 transition-all ${
           isDark
-            ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_rgba(245,158,11,0.25)]"
-            : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_rgba(245,158,11,0.2)]"
+            ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
+            : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
         }`}>
           <MagnifyingGlass size={15} color={isDark ? "#71717A" : "#94A3B8"} weight="duotone" />
           <InputBase

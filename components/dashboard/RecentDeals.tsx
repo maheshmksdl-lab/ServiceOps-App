@@ -41,7 +41,7 @@ export default function RecentDeals({ isDark = false }: { isDark?: boolean }) {
     <div className="rounded-xl sm:rounded-2xl border overflow-hidden backdrop-blur-xl transition-colors duration-300"
       style={{
         backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
-        borderColor: isDark ? "#4B2F1C" : "rgba(245,158,11,0.2)",
+        borderColor: isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)",
         boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
       }}>
       <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4 sm:px-6 py-3 sm:py-3.5 border-b ${isDark ? "border-[#4B2F1C]" : "border-[#FDE68A]"}`}

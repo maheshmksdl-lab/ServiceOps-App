@@ -3336,10 +3336,10 @@ const ALL_ROLES = ["Administrator", "VP of Operations", "Operations Manager", "S
 
 // Complementary card palette — same soft-pastel fills used by Dashboard KPICards
 const HOMEPAGE_CARD_PALETTE = [
-  { fill: "#D6E4F9" }, // Lavender
-  { fill: "#D0E5E0" }, // Sage
-  { fill: "#FAE3D0" }, // Peach
-  { fill: "#F5D9E1" }, // Blush
+  { fill: "var(--serviceops-tint)" },
+  { fill: "var(--serviceops-soft)" },
+  { fill: "var(--serviceops-surface)" },
+  { fill: "var(--serviceops-tint)" },
   { fill: "#E2E4EA" }, // Slate
 ];
 
