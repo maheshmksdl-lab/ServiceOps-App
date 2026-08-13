@@ -142,6 +142,31 @@ h3 { font-size: 1.125rem;line-height: 1.4; margin-bottom: 1rem; font-weight: 600
   color: var(--text-body);
 } */
 
+/* ── Printable job card / invoice ────────────────
+   The sheet lives in the normal DOM but is hidden on
+   screen; printing hides the app shell and reveals it,
+   so window.print() outputs the document alone.       */
+.job-print-sheet { display: none; }
+
+@media print {
+  @page { margin: 14mm; }
+
+  body { background: #fff !important; }
+
+  body * { visibility: hidden !important; }
+
+  .job-print-sheet,
+  .job-print-sheet * { visibility: visible !important; }
+
+  .job-print-sheet {
+    display: block;
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    background: #fff;
+  }
+}
+
 /* ── Text color utilities ──── */
 .text-secondary { color: #6b7280; }
 

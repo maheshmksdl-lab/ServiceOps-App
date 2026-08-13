@@ -13,6 +13,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import {
   House, CaretRight, Plus, MagnifyingGlass, CalendarBlank, CaretDown, Sliders,
   DotsThreeVertical, Eye, Export as ExportIcon, ClipboardText, FolderOpen,
@@ -27,11 +29,12 @@ import {
 } from "recharts";
 import MetricCard from "@/components/shared/MetricCard";
 import FiltersDrawer, { type FilterRow } from "@/components/leads/FiltersDrawer";
+import NewJobDrawer from "@/components/jobs/NewJobDrawer";
 import { useTheme } from "@/components/ThemeContext";
 import {
   ALL_JOBS, STATUS_ORDER, SERVICE_TYPE_ORDER, STATUS_META, SERVICE_TYPE_META,
-  PRIORITY_META, TECHNICIANS, TECHNICIAN_AVATARS, REGIONS,
-  type JobStatus, type JobPriority, type ServiceType,
+  PRIORITY_META, TECHNICIANS, TECHNICIAN_AVATARS, REGIONS, createJob,
+  type JobStatus, type JobPriority, type ServiceType, type JobRecord, type NewJobInput,
 } from "@/lib/jobsData";
 
 // ---------------------------------------------
@@ -158,12 +161,28 @@ export default function JobsPage() {
   const [rowMenu, setRowMenu]       = useState<{ anchor: HTMLElement; id: number } | null>(null);
   const [bulkAnchor, setBulkAnchor] = useState<HTMLElement | null>(null);
   const [dateAnchor, setDateAnchor] = useState<HTMLElement | null>(null);
+  const [newJobOpen, setNewJobOpen] = useState(false);
+  const [createdJob, setCreatedJob] = useState<JobRecord | null>(null);
+  const [allJobs, setAllJobs]       = useState<JobRecord[]>(ALL_JOBS);
 
-  const customers = useMemo(() => Array.from(new Set(ALL_JOBS.map(j => j.customer))).sort(), []);
+  const customers = useMemo(() => Array.from(new Set(allJobs.map(j => j.customer))).sort(), [allJobs]);
 
   const applyFilter = (next: () => void) => { next(); setPage(1); };
 
-  const filtered = useMemo(() => ALL_JOBS.filter(j => {
+  // Create Job — persist through the shared dataset (so the details screen can
+  // resolve it too), then clear the view down so the new row is actually visible.
+  const handleCreateJob = (input: NewJobInput) => {
+    const job = createJob(input);
+    setAllJobs([...ALL_JOBS]);
+    setSearch("");
+    setStatusF("All"); setPriorityF("All"); setTechF("All");
+    setCustomerF("All"); setServiceF("All"); setRegionF("All");
+    setActiveFilters([]);
+    setPage(1);
+    setCreatedJob(job);
+  };
+
+  const filtered = useMemo(() => allJobs.filter(j => {
     const q = search.trim().toLowerCase();
     const matchSearch = !q || j.jobId.toLowerCase().includes(q) || j.customer.toLowerCase().includes(q) || j.technician.toLowerCase().includes(q);
     const matchStatus = statusF === "All" || j.status === statusF;
@@ -189,7 +208,7 @@ export default function JobsPage() {
       }
     });
     return matchSearch && matchStatus && matchPriority && matchTech && matchCustomer && matchService && matchRegion && matchAdv;
-  }), [search, statusF, priorityF, techF, customerF, serviceF, regionF, activeFilters]);
+  }), [search, statusF, priorityF, techF, customerF, serviceF, regionF, activeFilters, allJobs]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
@@ -213,21 +232,21 @@ export default function JobsPage() {
 
   // KPIs — computed from the full dataset (not the filtered/paginated view)
   const kpis = useMemo(() => {
-    const total = ALL_JOBS.length;
-    const open = ALL_JOBS.filter(j => j.status === "Scheduled").length;
-    const inProgress = ALL_JOBS.filter(j => j.status === "In Progress").length;
-    const completed = ALL_JOBS.filter(j => j.status === "Completed").length;
-    const slaBreached = ALL_JOBS.filter(j => j.slaBreached).length;
+    const total = allJobs.length;
+    const open = allJobs.filter(j => j.status === "Scheduled").length;
+    const inProgress = allJobs.filter(j => j.status === "In Progress").length;
+    const completed = allJobs.filter(j => j.status === "Completed").length;
+    const slaBreached = allJobs.filter(j => j.slaBreached).length;
     return { total, open, inProgress, completed, slaBreached };
-  }, []);
+  }, [allJobs]);
 
   // Chart data
   const statusChartData = useMemo(() => STATUS_ORDER.map(s => ({
-    name: s, value: ALL_JOBS.filter(j => j.status === s).length,
-  })), []);
+    name: s, value: allJobs.filter(j => j.status === s).length,
+  })), [allJobs]);
   const serviceChartData = useMemo(() => SERVICE_TYPE_ORDER.map(s => ({
-    name: s, value: ALL_JOBS.filter(j => j.serviceType === s).length,
-  })), []);
+    name: s, value: allJobs.filter(j => j.serviceType === s).length,
+  })), [allJobs]);
   const trendData = [
     { day: "May 20", jobs: 34 }, { day: "May 21", jobs: 41 }, { day: "May 22", jobs: 38 },
     { day: "May 23", jobs: 52 }, { day: "May 24", jobs: 47 }, { day: "May 25", jobs: 29 },
@@ -241,7 +260,7 @@ export default function JobsPage() {
         {/* -- Breadcrumb + Header -- */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <div className={`flex items-center gap-1.5 text-[13.5px]/[18px] mb-1 ${isDark ? "text-[#E4E4E7]" : "text-slate-400"}`}>
+            <div className={`flex items-center gap-1.5 text-[13.5px]/[18px] my-4 ${isDark ? "text-[#E4E4E7]" : "text-slate-400"}`}>
               <House size={16} weight="duotone" />
               <CaretRight size={12} weight="duotone" />
               <Link href="/jobs" className={`transition-colors font-medium ${isDark ? "hover:text-[#D4D4D8]" : "hover:text-[var(--serviceops-primary)]"}`}>Jobs</Link>
@@ -250,13 +269,14 @@ export default function JobsPage() {
           </div>
 
           <Button variant="contained"
+            onClick={() => setNewJobOpen(true)}
             startIcon={<Plus size={16} weight="bold" />}
             sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: isDark ? "#F4F4F5" : "#3B1F00", borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "15px", px: 2.25, py: 0.85, boxShadow: isDark ? "none" : "0 1px 8px 0 rgba(245,158,11,0.35)", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-action)", boxShadow: isDark ? "none" : "0 2px 14px 0 rgba(245,158,11,0.38)" }, "&:active": { bgcolor: isDark ? "#52525B" : "var(--serviceops-hover)" } }}>
             Create Job
           </Button>
         </div>
 
-        {/* -- Toolbar row 1: search + date + status + priority -- */}
+        {/* -- Toolbar row 1: search + date -- */}
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2.5">
           <div className={`flex items-center gap-2 border rounded-xl px-3 py-2 flex-1 lg:w-80 focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-primary)] transition-all ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-[#f9fbff] border-[var(--serviceops-soft)]"}`}>
             <MagnifyingGlass size={15} color="#94A3B8" weight="duotone" />
@@ -272,7 +292,7 @@ export default function JobsPage() {
               onClick={e => setDateAnchor(e.currentTarget)}
               startIcon={<CalendarBlank size={14} weight="duotone" />}
               endIcon={<CaretDown size={11} weight="bold" />}
-              sx={{ textTransform: "none", fontWeight: 500, fontSize: "13.5px", borderRadius: "10px", px: 1.5, py: 0.9,
+              sx={{ textTransform: "none", fontWeight: 500, fontSize: "13.5px", borderRadius: "10px", px: 1.5, py: 1.3,
                 border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0A0A0A" : "#fff",
                 "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-tint)" } }}>
               {dateRange}
@@ -286,16 +306,15 @@ export default function JobsPage() {
                 </MenuItem>
               ))}
             </Menu>
-
-            <DropdownField label="Status" value={statusF} options={["All", ...STATUS_ORDER]} onChange={v => applyFilter(() => setStatusF(v))} />
-            <DropdownField label="Priority" value={priorityF} options={["All", "High", "Medium", "Low"]} onChange={v => applyFilter(() => setPriorityF(v))} />
           </div>
         </div>
 
-        {/* -- Toolbar row 2: technician / customer / service type / region / filters -- */}
+        {/* -- Toolbar row 2: technician / customer / status / priority / service type / region / filters -- */}
         <div className="flex items-center gap-2 flex-wrap">
           <DropdownField label="Technician" value={techF} options={["All", ...TECHNICIANS]} onChange={v => applyFilter(() => setTechF(v))} />
           <DropdownField label="Customer" value={customerF} options={["All", ...customers]} onChange={v => applyFilter(() => setCustomerF(v))} />
+          <DropdownField label="Status" value={statusF} options={["All", ...STATUS_ORDER]} onChange={v => applyFilter(() => setStatusF(v))} />
+          <DropdownField label="Priority" value={priorityF} options={["All", "High", "Medium", "Low"]} onChange={v => applyFilter(() => setPriorityF(v))} />
           <DropdownField label="Service Type" value={serviceF} options={["All", ...SERVICE_TYPE_ORDER]} onChange={v => applyFilter(() => setServiceF(v))} />
           <DropdownField label="Region" value={regionF} options={["All", ...REGIONS]} onChange={v => applyFilter(() => setRegionF(v))} />
 
@@ -435,7 +454,7 @@ export default function JobsPage() {
 
           {/* -- Pagination footer -- */}
           <div className={`flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-tint)]"}`}>
-            <p className={`m-0 text-[12.5px] ${isDark ? "text-[#71717A]" : "text-slate-400"}`}>
+            <p className={`m-0 text-[12.5px] ${isDark ? "text-[#71717A]" : "text-slate-500"}`}>
               {filtered.length === 0 ? "No entries" : `Showing ${(safePage - 1) * PAGE_SIZE + 1} to ${Math.min(safePage * PAGE_SIZE, filtered.length)} of ${filtered.length} entries`}
             </p>
             <div className="flex items-center gap-1">
@@ -492,7 +511,7 @@ export default function JobsPage() {
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: isDark ? STATUS_META[d.name as JobStatus].dark : STATUS_META[d.name as JobStatus].light }} />
                     <span className={`flex-1 truncate ${isDark ? "text-[#D4D4D8]" : "text-slate-600"}`}>{d.name}</span>
                     <span className={`font-semibold ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>{d.value}</span>
-                    <span className={isDark ? "text-[#52525B]" : "text-slate-300"}>({kpis.total ? Math.round((d.value / kpis.total) * 100) : 0}%)</span>
+                    <span className={isDark ? "text-[#52525B]" : "text-slate-400"}>({kpis.total ? Math.round((d.value / kpis.total) * 100) : 0}%)</span>
                   </div>
                 ))}
               </div>
@@ -523,7 +542,7 @@ export default function JobsPage() {
             <ResponsiveContainer width="100%" height={216}>
               <LineChart data={trendData} margin={{ top: 10, right: 8, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#27272A" : "var(--serviceops-soft)"} vertical={false} />
-                <XAxis dataKey="day" tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#94A3B8" }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="day" tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#9CA3AF" }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#94A3B8" }} axisLine={false} tickLine={false} width={30} />
                 <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ stroke: "var(--serviceops-primary)", strokeWidth: 1, strokeDasharray: "4 3" }} />
                 <Line type="monotone" dataKey="jobs" stroke="var(--serviceops-primary)" strokeWidth={2.5} dot={{ r: 3, fill: "var(--serviceops-primary)" }} activeDot={{ r: 5 }} />
@@ -580,6 +599,36 @@ export default function JobsPage() {
         columns={JOB_FILTER_COLUMNS}
         subtitle="Narrow down jobs by conditions"
       />
+
+      {/* -- Create Job -- */}
+      <NewJobDrawer
+        open={newJobOpen}
+        onClose={() => setNewJobOpen(false)}
+        customers={customers}
+        onSubmit={handleCreateJob}
+      />
+
+      <Snackbar
+        open={Boolean(createdJob)}
+        autoHideDuration={5000}
+        onClose={() => setCreatedJob(null)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          severity="success"
+          variant="filled"
+          onClose={() => setCreatedJob(null)}
+          action={
+            <Button size="small" onClick={() => { const job = createdJob; setCreatedJob(null); if (job) router.push(`/jobs/${job.id}`); }}
+              sx={{ color: "#fff", textTransform: "none", fontWeight: 700, fontSize: "0.78rem" }}>
+              View
+            </Button>
+          }
+          sx={{ fontWeight: 600, borderRadius: "10px", alignItems: "center" }}
+        >
+          Job {createdJob?.jobId} created for {createdJob?.customer}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

@@ -266,7 +266,7 @@ export default function AppHeader() {
         </button>
         <img
           src="/logo.png"
-          alt="Social DNA Labs"
+          alt="ServiceOps"
           style={{ height: "28px", width: "auto", display: "block", flexShrink: 0 }}
         />
       </div>
