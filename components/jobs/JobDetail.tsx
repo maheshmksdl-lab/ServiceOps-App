@@ -997,7 +997,7 @@ export default function JobDetail({ jobId }: { jobId: number }) {
         {/* ══ Content grid — four tracks: the two wide info cards, then the
               narrow technician / sidebar columns. Every row below places
               itself on these same tracks so edges line up down the page. ══ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.6fr_1.6fr_1fr_1fr] gap-4 pb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.5fr_1.5fr_1fr_1fr] gap-4 pb-6">
 
           {/* ── Row 1 ── */}
           <Card title="Customer" icon={ClipboardText}
@@ -1063,7 +1063,7 @@ export default function JobDetail({ jobId }: { jobId: number }) {
             <div className="grid grid-cols-3 gap-1.5">
               <button onClick={showLiveTracking}
                 className={`flex flex-col items-center gap-1 py-2 rounded-lg text-[10.5px] font-semibold transition-colors ${isDark ? "bg-[#18181B] text-[#D4D4D8] hover:bg-[#27272A]" : "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-soft)]"}`}>
-                <NavigationArrow size={15} weight="duotone" />Live Location
+                <NavigationArrow size={15} weight="duotone" />Location
               </button>
               <a href={`tel:${TECHNICIAN_PHONES[job.technician].replace(/\s/g, "")}`}
                 className={`flex flex-col items-center gap-1 py-2 rounded-lg text-[10.5px] font-semibold transition-colors ${isDark ? "bg-[#18181B] text-[#D4D4D8] hover:bg-[#27272A]" : "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-soft)]"}`}>
@@ -1077,7 +1077,7 @@ export default function JobDetail({ jobId }: { jobId: number }) {
           </Card>
 
           <Card title="Quick Actions" icon={Lightning}>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {QUICK_ACTIONS.map(({ label, icon: Icon, color, onClick }) => (
                 <button key={label} onClick={e => onClick(e)}
                   className={`flex flex-col items-center gap-1.5 py-2.5 px-1 rounded-xl text-center transition-colors ${isDark ? "hover:bg-[#18181B]" : "hover:bg-[var(--serviceops-surface)]"}`}>
@@ -1149,8 +1149,12 @@ export default function JobDetail({ jobId }: { jobId: number }) {
             )}
           </div>
 
-          {/* ── Sidebar: notes + attachments, on the fourth track ── */}
-          <div className="md:col-span-2 xl:col-span-1 space-y-4 min-w-0">
+          {/* ── Sidebar: notes + attachments, on the fourth track. self-start
+                 keeps this column from being grid-stretched to match the
+                 taller tab panel beside it — otherwise each stacked Card's
+                 h-full would inflate to fill that borrowed height and the
+                 two cards would overlap. ── */}
+          <div className="md:col-span-2 xl:col-span-1 self-start space-y-4 min-w-0">
             <Card title="Job Notes" icon={Note} meta={ws.notes.length ? `${ws.notes.length}` : undefined}>
               <div className={`rounded-xl border px-3 py-2 mb-2 transition-colors focus-within:border-[var(--serviceops-primary)] ${isDark ? "bg-[#0F0F0F] border-[#27272A]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)]"}`}>
                 <InputBase fullWidth multiline minRows={2} placeholder="Add internal note…"

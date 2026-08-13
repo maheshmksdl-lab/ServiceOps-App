@@ -301,7 +301,11 @@ html.dark .dark-text-muted              { color: var(--text-muted) !important; }
 
 /* ── Tablet optimizations ──────────────────── */
 @media (min-width: 641px) and (max-width: 1023px) {
-  .grid-cols-1 {
+  /* Skip grids that already define their own md: column count (e.g. Job
+     Details' content grid) — this rule ties with md:grid-cols-N in the
+     cascade and, being declared later, was winning and silently breaking
+     those layouts at tablet widths. */
+  .grid-cols-1:not([class*="md:grid-cols"]) {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
