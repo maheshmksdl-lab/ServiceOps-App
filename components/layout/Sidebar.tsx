@@ -96,8 +96,8 @@ export default function Sidebar() {
             position: "fixed", top: 0, left: 0,
             width: "min(280px, 85vw)", height: "100vh",
             zIndex: 100,
-            backgroundColor: isDark ? "var(--serviceops-surface)" : "var(--serviceops-surface)",
-            boxShadow: isDark ? "4px 0 24px rgba(0,0,0,0.45)" : "4px 0 24px rgba(120,53,15,0.12)",
+            backgroundColor: isDark ? "var(--serviceops-surface)" : "#ffffff",
+            boxShadow: isDark ? "4px 0 24px rgba(0,0,0,0.45)" : "4px 0 24px rgba(120,53,15,0.08)",
             display: "flex", flexDirection: "column",
             transform: drawerOpen ? "translateX(0)" : "translateX(-100%)",
             transition: "transform 0.28s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -184,7 +184,7 @@ export default function Sidebar() {
               <GearSixIcon size={19} weight="duotone" className={`flex-shrink-0 ${isDark ? "text-[var(--serviceops-muted)] group-hover:text-[var(--serviceops-primary)]" : "text-[var(--serviceops-muted)] group-hover:text-[var(--serviceops-primary)]"}`} />
               Settings
             </Link>
-              <div className={`flex items-center gap-2.5 mt-1 px-3 py-2 rounded-xl border ${isDark ? "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)]"}`}>
+              <div className={`flex items-center gap-2.5 mt-1 px-3 py-2 rounded-xl border ${isDark ? "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]" : "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]"}`}>
               <div className="relative flex-shrink-0">
                 <Avatar
                   src={OWNER_AVATARS["PM SDL"]}
@@ -212,7 +212,7 @@ export default function Sidebar() {
       style={{
         top: "72px",
         height: "calc(100vh - 72px)",
-        backgroundColor: isDark ? "var(--bg-sidebar)" : "var(--serviceops-surface)",
+        backgroundColor: isDark ? "var(--bg-sidebar)" : "#ffffff",
         width: collapsed ? "68px" : "260px",
         transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, border-color 0.2s ease",
       }}

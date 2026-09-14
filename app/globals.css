@@ -7,10 +7,17 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   max-width: 100vw;
   overflow-x: hidden;
+}
+
+/* overflow-x must live on html only — any non-"visible" overflow value on
+   body (even though it propagates to the viewport) still makes body count
+   as the nearest scrolling ancestor for descendant position:sticky elements,
+   which breaks every sticky sidebar in the app. */
+body {
+  max-width: 100vw;
 }
 
 /* ── Light mode tokens ──────────────────────── */

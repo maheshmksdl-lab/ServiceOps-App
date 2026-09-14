@@ -7,7 +7,7 @@ export default function PageSkeleton() {
       <Sidebar />
       <div className="sidebar-content flex-1 flex flex-col min-h-screen overflow-auto">
         {/* TopBar skeleton */}
-        <div className="h-[60px] flex items-center px-4 md:px-8 border-b border-[var(--serviceops-soft)] bg-[var(--serviceops-surface)] shrink-0">
+        <div className="h-[60px] flex items-center px-4 md:px-8 border-b border-[var(--serviceops-soft)] bg-white dark:bg-[var(--serviceops-surface)] shrink-0">
           <div className="h-5 w-40 rounded-lg bg-slate-200 dark:bg-[var(--serviceops-surface)] animate-pulse" />
           <div className="ml-auto flex gap-3">
             <div className="h-8 w-56 rounded-xl bg-slate-100 dark:bg-[var(--serviceops-tint)] animate-pulse hidden md:block" />

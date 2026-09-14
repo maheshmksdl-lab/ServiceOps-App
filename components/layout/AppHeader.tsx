@@ -241,7 +241,7 @@ export default function AppHeader() {
       style={{
         position: "fixed", top: 0, left: 0, right: 0,
         height: "72px", zIndex: 60,
-        backgroundColor: isDark ? "var(--serviceops-surface)" : "var(--serviceops-surface)",
+        backgroundColor: isDark ? "var(--serviceops-surface)" : "#ffffff",
         borderBottom: `1px solid ${isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)"}`,
         display: "flex", alignItems: "center",
         transition: "background-color 0.2s ease, border-color 0.2s ease",
@@ -288,7 +288,7 @@ export default function AppHeader() {
         <div className={`flex items-center gap-2 border rounded-xl px-3 py-1.5 w-60 transition-all ${
           isDark
             ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
-            : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
+            : "bg-slate-50 border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
         }`}>
           <MagnifyingGlass size={15} color={isDark ? "#71717A" : "#94A3B8"} weight="duotone" />
           <InputBase
