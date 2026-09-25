@@ -360,7 +360,7 @@ export default function ContactsPage() {
                 checkboxSelection
                 disableRowSelectionOnClick
                 disableColumnMenu
-                rowHeight={44}
+                rowHeight={52}
                 columnHeaderHeight={40}
                 rowSelectionModel={selected}
                 onRowSelectionModelChange={model => setSelected(model as number[])}

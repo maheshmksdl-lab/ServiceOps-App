@@ -18,11 +18,11 @@ type FeedItem = {
 };
 
 const feed: FeedItem[] = [
-  { id:1, Icon:TrendUp,       iconColor:"#78350F", iconColorDark:"#FBBF24", iconBg:"#FAF2DB", title:"Matrix Corp moved to Negotiation",   user:"PM SDL",  initials:"PM", avatarBg:"#F59E0B", ownerKey:"PM SDL",  time:"5m ago"  },
-  { id:2, Icon:UserPlus,      iconColor:"#D97706", iconColorDark:"#FBBF24", iconBg:"#FFF7D6", title:"New lead added: James Wilson",        user:"Sarah K", initials:"SK", avatarBg:"#FBBF24", ownerKey:"Sarah K", time:"23m ago" },
-  { id:3, Icon:PencilSimple,  iconColor:"#F59E0B", iconColorDark:"#FBBF24", iconBg:"#FFF7D6", title:"Sweany Inc contact updated",          user:"PM SDL",  initials:"PM", avatarBg:"#F59E0B", ownerKey:"PM SDL",  time:"1h ago"  },
-  { id:4, Icon:CheckCircle,   iconColor:"#C2410C", iconColorDark:"#FCD34D", iconBg:"#FFF7D6", title:"Task: Follow up with Apex done",      user:"John D",  initials:"JD", avatarBg:"#D97706", ownerKey:"John D",  time:"2h ago"  },
-  { id:5, Icon:CurrencyDollar,iconColor:"#78350F", iconColorDark:"#FCD34D", iconBg:"#FAF2DB", title:"New deal created: Pixel Studios",     user:"Ria M",   initials:"RM", avatarBg:"#78350F", ownerKey:"Ria M",   time:"3h ago"  },
+  { id:1, Icon:TrendUp,       iconColor:"#F59E0B", iconColorDark:"#FBBF24", iconBg:"#FEF5E7", title:"Matrix Corp moved to Negotiation",   user:"PM SDL",  initials:"PM", avatarBg:"#F59E0B", ownerKey:"PM SDL",  time:"5m ago"  },
+  { id:2, Icon:UserPlus,      iconColor:"#F59E0B", iconColorDark:"#FBBF24", iconBg:"#FEF5E7", title:"New lead added: James Wilson",        user:"Sarah K", initials:"SK", avatarBg:"#F7B13C", ownerKey:"Sarah K", time:"23m ago" },
+  { id:3, Icon:PencilSimple,  iconColor:"#F59E0B", iconColorDark:"#FBBF24", iconBg:"#FEF5E7", title:"Sweany Inc contact updated",          user:"PM SDL",  initials:"PM", avatarBg:"#F59E0B", ownerKey:"PM SDL",  time:"1h ago"  },
+  { id:4, Icon:CheckCircle,   iconColor:"#F59E0B", iconColorDark:"#FCD34D", iconBg:"#FEF5E7", title:"Task: Follow up with Apex done",      user:"John D",  initials:"JD", avatarBg:"#6B6B6B", ownerKey:"John D",  time:"2h ago"  },
+  { id:5, Icon:CurrencyDollar,iconColor:"#F59E0B", iconColorDark:"#FCD34D", iconBg:"#FEF5E7", title:"New deal created: Pixel Studios",     user:"Ria M",   initials:"RM", avatarBg:"#111111", ownerKey:"Ria M",   time:"3h ago"  },
 ];
 
 export default function ActivityFeed({ isDark = false }: { isDark?: boolean }) {
@@ -31,11 +31,11 @@ export default function ActivityFeed({ isDark = false }: { isDark?: boolean }) {
       style={{
         backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
         borderColor: isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)",
-        boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
+        boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(17,17,17,0.08)",
       }}>
       <div className="mb-4 sm:mb-5">
-        <h3 className={`m-0 text-sm sm:text-[14px] font-bold ${isDark ? "text-[#FFF3D6]" : "text-[#78350F]"}`}>Recent Activity</h3>
-        <p className={`text-[11px] sm:text-[12px] mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>Live team updates</p>
+        <h3 className={`m-0 text-sm sm:text-[14px] font-bold ${isDark ? "text-[#FFF3D6]" : "text-[#111111]"}`}>Recent Activity</h3>
+        <p className={`text-[11px] sm:text-[12px] mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>Live team updates</p>
       </div>
 
       <div className="flex-1 space-y-3 sm:space-y-4">
@@ -48,12 +48,12 @@ export default function ActivityFeed({ isDark = false }: { isDark?: boolean }) {
                   <Icon size={14} color={isDark ? item.iconColorDark : item.iconColor} weight="duotone" />
                 </div>
                 {idx < feed.length - 1 && (
-                  <div className={`w-px flex-1 mt-1 mb-0 h-[14px] ${isDark ? "bg-[#4B2F1C]" : "bg-[#FDE68A]"}`} />
+                  <div className={`w-px flex-1 mt-1 mb-0 h-[14px] ${isDark ? "bg-[#4B2F1C]" : "bg-[#E5E5E5]"}`} />
                 )}
               </div>
 
               <div className="flex-1 min-w-0 pb-1">
-                <p className={`text-xs sm:text-[14px] font-medium leading-snug transition-colors ${isDark ? "text-[#F7E2B2] group-hover:text-[#FFF3D6]" : "text-[#5C3A1E] group-hover:text-[#78350F]"}`}>
+                <p className={`text-xs sm:text-[14px] font-medium leading-snug transition-colors ${isDark ? "text-[#F7E2B2] group-hover:text-[#FFF3D6]" : "text-[#3D3D3D] group-hover:text-[#111111]"}`}>
                   {item.title}
                 </p>
                 <div className="flex items-center gap-1 sm:gap-1.5 mt-1 flex-wrap">
@@ -63,9 +63,9 @@ export default function ActivityFeed({ isDark = false }: { isDark?: boolean }) {
                   >
                     {item.initials}
                   </Avatar>
-                  <span className={`text-[10px] sm:text-[12px] font-medium ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>{item.user}</span>
+                  <span className={`text-[10px] sm:text-[12px] font-medium ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>{item.user}</span>
                   <span className={`text-[10px] sm:text-[12px] ${isDark ? "text-[#8C6A3F]" : "text-[#D0A966]"}`}>·</span>
-                  <span className={`text-[10px] sm:text-[12px] ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>{item.time}</span>
+                  <span className={`text-[10px] sm:text-[12px] ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>{item.time}</span>
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@ export default function ActivityFeed({ isDark = false }: { isDark?: boolean }) {
         })}
       </div>
 
-      <button className={`mt-3 sm:mt-4 w-full text-center text-[10px] sm:text-[11.5px] font-bold py-2 rounded-lg sm:rounded-xl transition-all duration-150 ${isDark ? "text-[#FBBF24] hover:text-[#FFF3D6] hover:bg-[#2D180D]" : "text-[#78350F] hover:text-[#78350F] hover:bg-[#FAF2DB]"}`}>
+      <button className={`mt-3 sm:mt-4 w-full text-center text-[10px] sm:text-[11.5px] font-bold py-2 rounded-lg sm:rounded-xl transition-all duration-150 ${isDark ? "text-[#FBBF24] hover:text-[#FFF3D6] hover:bg-[#2D180D]" : "text-[#111111] hover:text-[#111111] hover:bg-[#F7F7F7]"}`}>
         View all activity →
       </button>
     </div>

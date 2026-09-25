@@ -20,26 +20,30 @@ body {
   max-width: 100vw;
 }
 
-/* ── Light mode tokens ──────────────────────── */
+/* ── Light mode tokens — orange + neutral gray (reference palette) ── */
 :root {
   --sidebar-w: 260px;
-  --serviceops-depth: #78350F;
-  --serviceops-primary: #F59E0B;
-  --serviceops-action: #FBBF24;
-  --serviceops-hover: #FCD34D;
-  --serviceops-soft: #FDE68A;
-  --serviceops-tint: #FAF2DB;
-  --serviceops-surface: #FFFBEB;
-  --bg-page: #fffefb;
-  --bg-card: #FFFDF7;
-  --bg-sidebar: #78350F;
-  --bg-topbar: var(--serviceops-tint);
+  --serviceops-depth: #111111;               /* secondary — headings / primary text */
+  --serviceops-primary: #F59E0B;             /* primary — brand amber-orange */
+  --serviceops-action: #F59E0B;
+  --serviceops-hover: #F7B13C;
+  --serviceops-soft: #E5E5E5;                /* borders / dividers */
+  --serviceops-tint: #F7F7F7;                /* gray surface — sidebar, active items, table heads */
+  --serviceops-surface: #FFFFFF;
+  --serviceops-secondary: #3D3D3D;
+  --serviceops-muted: #6B6B6B;
+  --serviceops-primary-10: rgba(245, 158, 11, 0.10);
+  --serviceops-secondary-10: rgba(17, 17, 17, 0.10);
+  --bg-page: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #F7F7F7;
+  --bg-topbar: #FFFFFF;
   --border: var(--serviceops-soft);
-  --border-soft: var(--serviceops-tint);
+  --border-soft: #F0F0F0;
   --text-primary: var(--serviceops-depth);
-  --text-body: #5C3A1E;
-  --text-muted: #9B6F3F;
-  --text-faint: #B88B54;
+  --text-body: #3D3D3D;
+  --text-muted: #6B6B6B;
+  --text-faint: #9A9A9A;
 }
 
 /* ── Dark mode tokens — ServiceOps amber system ── */
@@ -61,6 +65,10 @@ html.dark {
   --serviceops-soft: #7C3D10;
   --serviceops-tint: #2D180D;
   --serviceops-surface: #0D0A07;
+  --serviceops-secondary: #F7E2B2;
+  --serviceops-muted: #D0A966;
+  --serviceops-primary-10: rgba(251, 191, 36, 0.10);
+  --serviceops-secondary-10: rgba(255, 243, 214, 0.10);
 
   --bg-page: var(--serviceops-surface);
   --bg-card: #18110B;
@@ -324,6 +332,80 @@ html.dark .dark-text-muted              { color: var(--text-muted) !important; }
     grid-column: span 1;
   }
 }
+
+/* ── Tables (light mode) — reference style ─────
+   Rounded #F7F7F7 header bar, 14px medium near-black labels,
+   borderless rows, 14px body text, gray hover.
+   `.so-table` tags plain <table>s; MUI Table / DataGrid share
+   the same palette (DataGrid layout lives in lib/dataGridStyles). */
+html:not(.dark) .so-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+html:not(.dark) .so-table thead tr {
+  background: transparent;
+  border: none;
+}
+html:not(.dark) .so-table thead th {
+  background-color: #F7F7F7 !important;
+  color: #111111 !important;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  border-top: none;
+  border-bottom: none;
+  border-color: #F0F0F0;
+}
+html:not(.dark) .so-table thead th:first-child { border-radius: 8px 0 0 8px; }
+html:not(.dark) .so-table thead th:last-child  { border-radius: 0 8px 8px 0; }
+html:not(.dark) .so-table thead th:only-child  { border-radius: 8px; }
+html:not(.dark) .so-table tbody tr {
+  background-color: #FFFFFF;
+  transition: background-color 0.15s ease;
+}
+html:not(.dark) .so-table tbody tr:hover { background-color: #F7F7F7; }
+html:not(.dark) .so-table tbody td {
+  font-size: 14px;
+  color: #111111;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border-top: none;
+  border-bottom: none;
+  border-color: #F0F0F0;
+}
+html:not(.dark) .so-table tbody tr td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+html:not(.dark) .so-table tbody tr td:last-child  { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+
+/* MUI <Table> */
+html:not(.dark) .MuiTableHead-root .MuiTableCell-head {
+  background-color: #F7F7F7;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  border-bottom: none;
+}
+html:not(.dark) .MuiTableHead-root .MuiTableCell-head:first-of-type { border-radius: 8px 0 0 8px; }
+html:not(.dark) .MuiTableHead-root .MuiTableCell-head:last-of-type  { border-radius: 0 8px 8px 0; }
+html:not(.dark) .MuiTableBody-root .MuiTableCell-body {
+  font-size: 14px;
+  color: #111111;
+  border-bottom: none;
+}
+
+/* Legacy slate / blue text inside tables → reference neutrals */
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.text-slate-900, .text-slate-800, .text-slate-700, .text-\[\#0C2472\]) { color: #111111; }
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.text-slate-600, .text-\[\#4A5675\], .text-\[\#475569\]) { color: #3D3D3D; }
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.text-slate-500, .text-slate-400) { color: #6B6B6B; }
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.text-slate-300, .text-slate-200) { color: #D2D2D2; }
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.text-\[\#1D4ED8\], .text-\[\#4A7AE8\], .text-blue-600) { color: var(--serviceops-primary); }
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.bg-\[\#E3ECFC\], .bg-\[\#EFF6FF\], .bg-\[\#f9fbff\]) { background-color: #F7F7F7; }
+html:not(.dark) :is(.so-table, .MuiTable-root, .MuiDataGrid-root) :is(.border-\[\#E3ECFC\], .border-\[\#EFF6FF\], .border-\[\#D0DEFA\]) { border-color: #E5E5E5; }
 
 /* ── Slim scrollbar ─────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }

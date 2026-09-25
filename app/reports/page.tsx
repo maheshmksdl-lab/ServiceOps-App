@@ -500,7 +500,7 @@ export default function ReportsPage() {
                 checkboxSelection
                 disableRowSelectionOnClick
                 disableColumnMenu
-                rowHeight={44}
+                rowHeight={52}
                 columnHeaderHeight={40}
                 rowSelectionModel={selected}
                 onRowSelectionModelChange={model => setSelected(model as string[])}

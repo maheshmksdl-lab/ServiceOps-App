@@ -9,19 +9,21 @@ interface MetricCardProps {
   accent: string; // deeper coordinating shade for icon/text accents
   isDark?: boolean;
   footer?: ReactNode;
+  borderColor?: string; // light-mode border override (defaults to the soft white edge)
+  iconBg?: string;      // light-mode icon chip background override
 }
 
 /**
  * Soft-pastel KPI-style metric card matching the Dashboard's KPICard.
  * Used for compact stat summaries in Reports and Home Customization.
  */
-export default function MetricCard({ title, value, icon, fill, accent, isDark = false, footer }: MetricCardProps) {
+export default function MetricCard({ title, value, icon, fill, accent, isDark = false, footer, borderColor, iconBg }: MetricCardProps) {
   return (
     <div
       className="rounded-xl sm:rounded-2xl p-4 sm:p-5 relative overflow-hidden border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
       style={{
         backgroundColor: isDark ? "var(--serviceops-surface)" : fill,
-        borderColor: isDark ? "var(--serviceops-soft)" : "rgba(255,255,255,0.5)",
+        borderColor: isDark ? "var(--serviceops-soft)" : (borderColor ?? "rgba(255,255,255,0.5)"),
         boxShadow: "0 6px 24px rgba(120,53,15,0.08)",
       }}
     >
@@ -36,7 +38,7 @@ export default function MetricCard({ title, value, icon, fill, accent, isDark = 
           {footer && <div className="mt-2 sm:mt-3">{footer}</div>}
         </div>
         {icon && (
-          <div className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 text-sm sm:text-base ${isDark ? "bg-[var(--serviceops-tint)]" : "bg-[var(--serviceops-surface)]"}`} style={{ color: accent }}>
+          <div className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 text-sm sm:text-base ${isDark ? "bg-[var(--serviceops-tint)]" : "bg-[var(--serviceops-surface)]"}`} style={{ color: accent, ...(!isDark && iconBg ? { backgroundColor: iconBg } : {}) }}>
             {icon}
           </div>
         )}

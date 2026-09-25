@@ -8,13 +8,13 @@ const BODY    = "var(--font-body), system-ui, -apple-system, sans-serif";
 
 const SERVICEOPS_PALETTE = {
   light: {
-    depth: "#78350F",
+    depth: "#111111",
     primary: "#F59E0B",
-    action: "#FBBF24",
-    hover: "#FCD34D",
-    soft: "#FDE68A",
-    tint: "#FAF2DB",
-    surface: "#FFFBEB",
+    action: "#F59E0B",
+    hover: "#F7B13C",
+    soft: "#E5E5E5",
+    tint: "#F7F7F7",
+    surface: "#FFFFFF",
   },
   dark: {
     depth: "#FFF3D6",
@@ -45,8 +45,8 @@ function buildTheme(isDark: boolean) {
   const bgHead = C.tint;
   const border = isDark ? "#4B2F1C" : C.soft;
   const textPri = C.depth;
-  const textBod = isDark ? "#F7E2B2" : "#5C3A1E";
-  const textMut = isDark ? "#D0A966" : "#9B6F3F";
+  const textBod = isDark ? "#F7E2B2" : "#3D3D3D";
+  const textMut = isDark ? "#D0A966" : "#6B6B6B";
 
   return createTheme({
     palette: {
@@ -57,7 +57,7 @@ function buildTheme(isDark: boolean) {
       warning:   { main: "#F59E0B" },
       error:     { main: "#EF4444" },
       background: {
-        default: isDark ? C.surface : "#FFFDF7",
+        default: isDark ? C.surface : "#FFFFFF",
         paper: bg,
       },
       text: {
@@ -141,7 +141,7 @@ function buildTheme(isDark: boolean) {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: C.primary, borderWidth: 1.5 },
             "&.Mui-focused": { boxShadow: `0 0 0 3px ${C.soft}40` },
             "&.Mui-disabled": {
-              backgroundColor: isDark ? "#000000" : "#EFF6FF",
+              backgroundColor: isDark ? "#000000" : "#F7F7F7",
               opacity: 1,
               "& .MuiOutlinedInput-notchedOutline": { borderColor: border },
             },
@@ -192,13 +192,13 @@ function buildTheme(isDark: boolean) {
             fontFamily: BODY,
             fontWeight: 600,
             fontSize: "0.75rem",
-            backgroundColor: isDark ? "#27272A" : "#F0F1F3",
+            backgroundColor: isDark ? "#27272A" : "#F7F7F7",
             color: isDark ? "#9CA3AF" : C.depth,
             borderRadius: "6px",
             padding: "4px 8px",
           },
           colorPrimary: {
-            backgroundColor: isDark ? `${C.primary}25` : `${C.primary}15`,
+            backgroundColor: isDark ? `${C.primary}25` : `${C.primary}1A`,
             color: isDark ? C.soft : C.primary,
           },
         },
@@ -256,11 +256,11 @@ function buildTheme(isDark: boolean) {
             fontFamily: BODY,
             fontSize: "0.82rem",
             color: textBod,
-            "&:hover": { backgroundColor: isDark ? "#27272A" : "#EFF6FF" },
+            "&:hover": { backgroundColor: isDark ? "#27272A" : "#F7F7F7" },
             "&.Mui-selected": {
-              backgroundColor: isDark ? `${C.primary}20` : `${C.primary}12`,
+              backgroundColor: isDark ? `${C.primary}20` : `${C.primary}1A`,
               color: C.primary,
-              "&:hover": { backgroundColor: isDark ? `${C.primary}30` : `${C.primary}1A` },
+              "&:hover": { backgroundColor: isDark ? `${C.primary}30` : `${C.primary}26` },
             },
           },
         },

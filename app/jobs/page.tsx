@@ -91,22 +91,22 @@ function DropdownField({ label, value, options, onChange }: {
         endIcon={<CaretDown size={11} weight="bold" />}
         sx={{
           justifyContent: "space-between", textTransform: "none", fontWeight: 500, fontSize: "13.5px",
-          borderRadius: "10px", px: 1.5, py: 0.9, minWidth: 148,
+          borderRadius: "8px", px: 1.5, py: 0.9, minWidth: 148,
           border: `1px solid ${active ? "var(--serviceops-primary)" : isDark ? "#27272A" : "var(--serviceops-soft)"}`,
-          color: active ? "var(--serviceops-primary)" : isDark ? "#D4D4D8" : "#334155",
-          bgcolor: isDark ? "#0A0A0A" : "#fff",
-          "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-tint)" },
+          color: active ? "var(--serviceops-primary)" : isDark ? "#D4D4D8" : "#111111",
+          bgcolor: isDark ? "#0A0A0A" : active ? "var(--serviceops-primary-10)" : "#fff",
+          "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-primary-10)" },
         }}>
         <span className="flex flex-col items-start leading-tight">
-          <span className={`text-[10px] font-medium ${isDark ? "text-[#71717A]" : "text-slate-400"}`}>{label}</span>
+          <span className={`text-[10px] font-medium ${isDark ? "text-[#71717A]" : "text-[#6B6B6B]"}`}>{label}</span>
           <span className="truncate max-w-[110px]">{value}</span>
         </span>
       </Button>
       <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}
-        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, boxShadow: isDark ? "0 8px 32px rgba(0,0,0,0.4)" : "0 8px 32px rgba(245,158,11,0.12)", minWidth: 190, maxHeight: 340 } }}>
+        PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, boxShadow: isDark ? "0 8px 32px rgba(0,0,0,0.4)" : "0 8px 32px rgba(17,17,17,0.08)", minWidth: 190, maxHeight: 340 } }}>
         {options.map(opt => (
           <MenuItem key={opt} selected={opt === value} onClick={() => { onChange(opt); setAnchor(null); }}
-            sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)", color: "var(--serviceops-primary)", fontWeight: 600 } }}>
+            sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "var(--serviceops-primary-10)", color: "var(--serviceops-primary)", fontWeight: 600 } }}>
             {opt}
           </MenuItem>
         ))}
@@ -118,10 +118,18 @@ function DropdownField({ label, value, options, onChange }: {
 function StatusPill({ status, isDark }: { status: JobStatus; isDark: boolean }) {
   const m = STATUS_META[status];
   const color = isDark ? m.dark : m.light;
-  const bg = isDark ? m.bgDark : m.bgLight;
+  // Light: white outlined chip with a status-coloured dot (reference style)
+  if (!isDark) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium px-2 py-[5px] rounded-md leading-none whitespace-nowrap bg-white border border-[var(--serviceops-soft)] text-[#3D3D3D]">
+        <span className="w-[6px] h-[6px] rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
+        {status}
+      </span>
+    );
+  }
   return (
     <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium px-2 py-[3px] rounded-full leading-none whitespace-nowrap"
-      style={{ backgroundColor: bg, color }}>
+      style={{ backgroundColor: m.bgDark, color }}>
       <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
       {status}
     </span>
@@ -130,9 +138,17 @@ function StatusPill({ status, isDark }: { status: JobStatus; isDark: boolean }) 
 
 function PriorityPill({ priority, isDark }: { priority: JobPriority; isDark: boolean }) {
   const m = PRIORITY_META[priority];
+  if (!isDark) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium px-2 py-[5px] rounded-md leading-none whitespace-nowrap bg-white border border-[var(--serviceops-soft)] text-[#3D3D3D]">
+        <span className="w-[6px] h-[6px] rounded-full flex-shrink-0" style={{ backgroundColor: m.text }} />
+        {priority}
+      </span>
+    );
+  }
   return (
     <span className="inline-flex items-center text-[12.5px] font-semibold px-2 py-[3px] rounded-full leading-none"
-      style={{ backgroundColor: isDark ? m.bgDark : m.bg, color: isDark ? m.textDark : m.text }}>
+      style={{ backgroundColor: m.bgDark, color: m.textDark }}>
       {priority}
     </span>
   );
@@ -260,31 +276,32 @@ export default function JobsPage() {
         {/* -- Breadcrumb + Header -- */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <div className={`flex items-center gap-1.5 text-[13.5px]/[18px] my-4 ${isDark ? "text-[#E4E4E7]" : "text-slate-400"}`}>
+            <div className={`flex items-center gap-1.5 text-[13.5px]/[18px] my-4 ${isDark ? "text-[#E4E4E7]" : "text-[#9A9A9A]"}`}>
               <House size={16} weight="duotone" />
               <CaretRight size={12} weight="duotone" />
               <Link href="/jobs" className={`transition-colors font-medium ${isDark ? "hover:text-[#D4D4D8]" : "hover:text-[var(--serviceops-primary)]"}`}>Jobs</Link>
             </div>
-            <h1 className="font-heading text-lg sm:text-[22px]/[28px] font-semibold text-slate-900 tracking-tight m-0">Jobs</h1>
+            <h1 className={`font-heading text-lg sm:text-[22px]/[28px] font-semibold tracking-tight m-0 ${isDark ? "text-slate-900" : "text-[#111111]"}`}>Jobs</h1>
+            <p className={`m-0 mt-1 text-[14px] ${isDark ? "text-[#A1A1AA]" : "text-[#3D3D3D]"}`}>Browse, manage, and track all service jobs across your technicians</p>
           </div>
 
           <Button variant="contained"
             onClick={() => setNewJobOpen(true)}
             startIcon={<Plus size={16} weight="bold" />}
-            sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: isDark ? "#F4F4F5" : "#3B1F00", borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "15px", px: 2.25, py: 0.85, boxShadow: isDark ? "none" : "0 1px 8px 0 rgba(245,158,11,0.35)", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-action)", boxShadow: isDark ? "none" : "0 2px 14px 0 rgba(245,158,11,0.38)" }, "&:active": { bgcolor: isDark ? "#52525B" : "var(--serviceops-hover)" } }}>
+            sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: isDark ? "#F4F4F5" : "#FFFFFF", borderRadius: "8px", textTransform: "none", fontWeight: 500, fontSize: "14.5px", px: 2.25, py: 0.9, boxShadow: "none", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-hover)", boxShadow: "none" }, "&:active": { bgcolor: isDark ? "#52525B" : "var(--serviceops-action)" } }}>
             Create Job
           </Button>
         </div>
 
         {/* -- Toolbar row 1: search + date -- */}
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2.5">
-          <div className={`flex items-center gap-2 border rounded-xl px-3 py-2 flex-1 lg:w-80 focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-primary)] transition-all ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-[#f9fbff] border-[var(--serviceops-soft)]"}`}>
-            <MagnifyingGlass size={15} color="#94A3B8" weight="duotone" />
+          <div className={`flex items-center gap-2 border rounded-lg px-3 py-2 flex-1 lg:w-80 focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-primary)] transition-all ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
+            <MagnifyingGlass size={15} color={isDark ? "#94A3B8" : "#111111"} weight={isDark ? "duotone" : "regular"} />
             <InputBase placeholder="Search jobs, customer, technician…" value={search}
               onChange={e => applyFilter(() => setSearch(e.target.value))}
-              sx={{ flex: 1, fontSize: "0.86rem", color: isDark ? "#D4D4D8" : "#334155", "& input::placeholder": { color: "#94A3B8", opacity: 1 } }}
+              sx={{ flex: 1, fontSize: "0.9rem", color: isDark ? "#D4D4D8" : "#111111", "& input::placeholder": { color: isDark ? "#94A3B8" : "#6B6B6B", opacity: 1 } }}
             />
-            {search && <button onClick={() => setSearch("")} className="text-slate-300 hover:text-slate-500 text-sm">✕</button>}
+            {search && <button onClick={() => setSearch("")} className={`text-sm ${isDark ? "text-slate-300 hover:text-slate-500" : "text-[#9A9A9A] hover:text-[#111111]"}`}>✕</button>}
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
@@ -292,16 +309,16 @@ export default function JobsPage() {
               onClick={e => setDateAnchor(e.currentTarget)}
               startIcon={<CalendarBlank size={14} weight="duotone" />}
               endIcon={<CaretDown size={11} weight="bold" />}
-              sx={{ textTransform: "none", fontWeight: 500, fontSize: "13.5px", borderRadius: "10px", px: 1.5, py: 1.3,
-                border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0A0A0A" : "#fff",
-                "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-tint)" } }}>
+              sx={{ textTransform: "none", fontWeight: 500, fontSize: "13.5px", borderRadius: "8px", px: 1.5, py: 1.3,
+                border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, color: isDark ? "#D4D4D8" : "#111111", bgcolor: isDark ? "#0A0A0A" : "#fff",
+                "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0F0F0F" : "var(--serviceops-primary-10)" } }}>
               {dateRange}
             </Button>
             <Menu anchorEl={dateAnchor} open={Boolean(dateAnchor)} onClose={() => setDateAnchor(null)}
               PaperProps={{ sx: { borderRadius: "12px", border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, minWidth: 190 } }}>
               {DATE_PRESETS.map(opt => (
                 <MenuItem key={opt} selected={opt === dateRange} onClick={() => { setDateRange(opt); setDateAnchor(null); }}
-                  sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)", color: "var(--serviceops-primary)", fontWeight: 600 } }}>
+                  sx={{ mx: 0.5, borderRadius: "8px", fontSize: "13.5px", "&.Mui-selected": { bgcolor: isDark ? "#27272A" : "var(--serviceops-primary-10)", color: "var(--serviceops-primary)", fontWeight: 600 } }}>
                   {opt}
                 </MenuItem>
               ))}
@@ -324,12 +341,12 @@ export default function JobsPage() {
             sx={{
               ml: { sm: "auto" },
               borderColor: activeFilters.length > 0 ? "var(--serviceops-primary)" : isDark ? "#27272A" : "var(--serviceops-soft)",
-              color: activeFilters.length > 0 ? "#3B1F00" : isDark ? "#E4E4E7" : "#3B1F00",
-              bgcolor: activeFilters.length > 0 ? "var(--serviceops-primary)" : isDark ? "#0F0F0F" : "var(--serviceops-tint)",
-              borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "14px",
+              color: activeFilters.length > 0 ? (isDark ? "#3B1F00" : "#FFFFFF") : isDark ? "#E4E4E7" : "#111111",
+              bgcolor: activeFilters.length > 0 ? "var(--serviceops-primary)" : isDark ? "#0F0F0F" : "#fff",
+              borderRadius: "8px", textTransform: "none", fontWeight: 500, fontSize: "14px",
               "&:hover": {
-                borderColor: activeFilters.length > 0 ? "var(--serviceops-action)" : "var(--serviceops-primary)",
-                bgcolor: activeFilters.length > 0 ? "var(--serviceops-action)" : isDark ? "#0A0A0A" : "var(--serviceops-soft)",
+                borderColor: activeFilters.length > 0 ? "var(--serviceops-hover)" : "var(--serviceops-primary)",
+                bgcolor: activeFilters.length > 0 ? "var(--serviceops-hover)" : isDark ? "#0A0A0A" : "var(--serviceops-primary-10)",
               },
             }}>
             Filters{activeFilters.length > 0 ? ` (${activeFilters.length})` : ""}
@@ -338,44 +355,46 @@ export default function JobsPage() {
 
         {/* -- KPI stat cards -- */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          <MetricCard title="Total Jobs" value={kpis.total.toLocaleString()} icon={<ClipboardText size={18} weight="duotone" />} fill="var(--serviceops-tint)" accent="var(--serviceops-primary)" isDark={isDark} />
-          <MetricCard title="Open Jobs" value={kpis.open} icon={<FolderOpen size={18} weight="duotone" />} fill="var(--serviceops-surface)" accent="var(--serviceops-action)" isDark={isDark} />
-          <MetricCard title="In Progress" value={kpis.inProgress} icon={<Hourglass size={18} weight="duotone" />} fill="var(--serviceops-soft)" accent="var(--serviceops-depth)" isDark={isDark} />
-          <MetricCard title="Completed" value={kpis.completed.toLocaleString()} icon={<CheckCircle size={18} weight="duotone" />} fill="var(--serviceops-tint)" accent="var(--serviceops-primary)" isDark={isDark} />
-          <MetricCard title="SLA Breached" value={kpis.slaBreached} icon={<WarningCircle size={18} weight="duotone" />} fill="var(--serviceops-surface)" accent="var(--serviceops-depth)" isDark={isDark} />
+          <MetricCard title="Total Jobs" value={kpis.total.toLocaleString()} icon={<ClipboardText size={18} weight="duotone" />} fill="var(--bg-card)" borderColor="var(--serviceops-soft)" iconBg="var(--serviceops-primary-10)" accent="var(--serviceops-primary)" isDark={isDark} />
+          <MetricCard title="Open Jobs" value={kpis.open} icon={<FolderOpen size={18} weight="duotone" />} fill="var(--bg-card)" borderColor="var(--serviceops-soft)" iconBg="var(--serviceops-primary-10)" accent="var(--serviceops-primary)" isDark={isDark} />
+          <MetricCard title="In Progress" value={kpis.inProgress} icon={<Hourglass size={18} weight="duotone" />} fill="var(--bg-card)" borderColor="var(--serviceops-soft)" iconBg="var(--serviceops-secondary-10)" accent="var(--serviceops-depth)" isDark={isDark} />
+          <MetricCard title="Completed" value={kpis.completed.toLocaleString()} icon={<CheckCircle size={18} weight="duotone" />} fill="var(--bg-card)" borderColor="var(--serviceops-soft)" iconBg="var(--serviceops-primary-10)" accent="var(--serviceops-primary)" isDark={isDark} />
+          <MetricCard title="SLA Breached" value={kpis.slaBreached} icon={<WarningCircle size={18} weight="duotone" />} fill="var(--bg-card)" borderColor="var(--serviceops-soft)" iconBg="var(--serviceops-secondary-10)" accent="var(--serviceops-depth)" isDark={isDark} />
         </div>
 
         {/* -- Job List card -- */}
-        <div className={`rounded-2xl border shadow-sm overflow-hidden ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
-          <div className={`flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 border-b flex-wrap ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-tint)]"}`}>
-            <p className={`font-heading text-[15px] font-semibold m-0 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>
-              Job List <span className={isDark ? "text-[#71717A]" : "text-slate-400"}>({filtered.length})</span>
+        <div className={`rounded-2xl border overflow-hidden ${isDark ? "shadow-sm bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
+          <div className={`flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 border-b flex-wrap ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-soft)]"}`}>
+            <p className={`font-heading text-[16px] font-semibold m-0 ${isDark ? "text-[#F4F4F5]" : "text-[#111111]"}`}>
+              Job List <span className={isDark ? "text-[#71717A]" : "text-[#6B6B6B] font-medium"}>({filtered.length})</span>
             </p>
             <div className="flex items-center gap-2">
               <Button variant="outlined" size="small" startIcon={<ExportIcon size={14} weight="duotone" />}
-                sx={{ borderColor: isDark ? "#27272A" : "var(--serviceops-soft)", color: isDark ? "#D4D4D8" : "#334155", bgcolor: isDark ? "#0F0F0F" : "#fff", borderRadius: "9px", textTransform: "none", fontWeight: 500, fontSize: "13.5px", "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0A0A0A" : "var(--serviceops-tint)" } }}>
+                sx={{ borderColor: isDark ? "#27272A" : "var(--serviceops-soft)", color: isDark ? "#D4D4D8" : "#111111", bgcolor: isDark ? "#0F0F0F" : "#fff", borderRadius: "8px", textTransform: "none", fontWeight: 500, fontSize: "13.5px", "&:hover": { borderColor: "var(--serviceops-primary)", bgcolor: isDark ? "#0A0A0A" : "var(--serviceops-primary-10)" } }}>
                 Export
               </Button>
               <Button variant="contained" size="small" disabled={selected.size === 0}
                 onClick={e => setBulkAnchor(e.currentTarget)}
-                sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: "#3B1F00", borderRadius: "9px", textTransform: "none", fontWeight: 600, fontSize: "13.5px", boxShadow: "none", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-action)" }, "&.Mui-disabled": { bgcolor: isDark ? "#18181B" : "var(--serviceops-tint)", color: isDark ? "#52525B" : "#94A3B8" } }}>
+                sx={{ bgcolor: isDark ? "#27272A" : "var(--serviceops-primary)", color: isDark ? "#3B1F00" : "#FFFFFF", borderRadius: "8px", textTransform: "none", fontWeight: 500, fontSize: "13.5px", boxShadow: "none", "&:hover": { bgcolor: isDark ? "#3F3F46" : "var(--serviceops-hover)", boxShadow: "none" }, "&.Mui-disabled": { bgcolor: isDark ? "#18181B" : "var(--serviceops-tint)", color: isDark ? "#52525B" : "#9A9A9A" } }}>
                 Bulk Actions{selected.size > 0 ? ` (${selected.size})` : ""}
               </Button>
             </div>
           </div>
 
           {/* -- Table -- */}
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse min-w-[880px]">
+          <div className={`overflow-x-auto ${isDark ? "" : "px-3 sm:px-4 pt-3"}`}>
+            <table className={`w-full min-w-[880px] ${isDark ? "border-collapse" : "border-separate border-spacing-0"}`}>
               <thead>
-                <tr className={isDark ? "bg-[#18181B]" : "bg-[var(--serviceops-soft)]"}>
-                  <th className="w-10 pl-4 py-2.5">
+                <tr className={isDark ? "bg-[#18181B]" : "bg-[var(--serviceops-tint)]"}>
+                  <th className={`w-10 pl-4 py-2.5 ${isDark ? "" : "rounded-l-lg py-3"}`}>
                     <Checkbox size="small" checked={allPageSelected} indeterminate={somePageSelected && !allPageSelected}
                       onChange={toggleAllOnPage}
-                      sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#CBD5E1", "&.Mui-checked, &.MuiCheckbox-indeterminate": { color: "var(--serviceops-primary)" } }} />
+                      sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#B4B4B4", "&.Mui-checked, &.MuiCheckbox-indeterminate": { color: "var(--serviceops-primary)" } }} />
                   </th>
-                  {["Job ID", "Customer", "Service Type", "Technician", "Priority", "Status", "ETA / SLA", ""].map(h => (
-                    <th key={h} className={`text-left px-3 py-2.5 font-heading text-[12px] font-semibold uppercase tracking-wide whitespace-nowrap ${isDark ? "text-[#E4E4E7]" : "text-[#737373]"}`}>{h}</th>
+                  {["Job ID", "Customer", "Service Type", "Technician", "Priority", "Status", "ETA / SLA", ""].map((h, i, arr) => (
+                    <th key={h} className={`text-left px-3 whitespace-nowrap ${isDark
+                      ? "py-2.5 font-heading text-[12px] font-semibold uppercase tracking-wide text-[#E4E4E7]"
+                      : `py-3 font-heading text-[14px] font-medium text-[#111111] ${i === arr.length - 1 ? "rounded-r-lg" : ""}`}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -383,53 +402,54 @@ export default function JobsPage() {
                 {pageRows.map(job => {
                   const ServiceIcon = SERVICE_ICON[job.serviceType];
                   const svcColor = isDark ? SERVICE_TYPE_META[job.serviceType].dark : SERVICE_TYPE_META[job.serviceType].light;
+                  const cellPy = isDark ? "py-2.5" : "py-3.5";
                   return (
                     <tr key={job.id} onClick={() => router.push(`/jobs/${job.id}`)}
-                      className={`cursor-pointer border-t transition-colors group ${isDark ? "border-[#18181B] hover:bg-[#0F0F0F]" : "border-[var(--serviceops-tint)] hover:bg-[rgba(245,158,11,0.06)]"} ${selected.has(job.id) ? (isDark ? "bg-[#18181B]" : "bg-[rgba(245,158,11,0.08)]") : ""}`}>
-                      <td className="pl-4 py-2.5" onClick={e => e.stopPropagation()}>
+                      className={`cursor-pointer transition-colors group ${isDark ? "border-t border-[#18181B] hover:bg-[#0F0F0F]" : "hover:bg-[var(--serviceops-tint)]"} ${selected.has(job.id) ? (isDark ? "bg-[#18181B]" : "bg-[var(--serviceops-primary-10)]") : ""}`}>
+                      <td className={`pl-4 ${cellPy} ${isDark ? "" : "rounded-l-lg"}`} onClick={e => e.stopPropagation()}>
                         <Checkbox size="small" checked={selected.has(job.id)} onChange={() => toggleRow(job.id)}
-                          sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#CBD5E1", "&.Mui-checked": { color: "var(--serviceops-primary)" } }} />
+                          sx={{ p: 0.5, color: isDark ? "#3F3F46" : "#B4B4B4", "&.Mui-checked": { color: "var(--serviceops-primary)" } }} />
                       </td>
-                      <td className="px-3 py-2.5">
+                      <td className={`px-3 ${cellPy}`}>
                         <Link href={`/jobs/${job.id}`} onClick={e => e.stopPropagation()}
-                          className={`font-heading text-[14px] font-semibold hover:underline whitespace-nowrap ${isDark ? "text-[var(--serviceops-primary)]" : "text-[var(--serviceops-primary)]"}`}>
+                          className="font-heading text-[14px] font-semibold hover:underline whitespace-nowrap text-[var(--serviceops-primary)]">
                           {job.jobId}
                         </Link>
                       </td>
-                      <td className={`px-3 py-2.5 text-[13.5px] whitespace-nowrap ${isDark ? "text-[#D4D4D8]" : "text-slate-700"}`}>{job.customer}</td>
-                      <td className="px-3 py-2.5">
-                        <span className={`inline-flex items-center gap-1.5 text-[13px] whitespace-nowrap ${isDark ? "text-[#D4D4D8]" : "text-slate-600"}`}>
-                          <ServiceIcon size={13} weight="duotone" color={svcColor} />
+                      <td className={`px-3 ${cellPy} text-[14px] whitespace-nowrap ${isDark ? "text-[#D4D4D8]" : "text-[#111111]"}`}>{job.customer}</td>
+                      <td className={`px-3 ${cellPy}`}>
+                        <span className={`inline-flex items-center gap-1.5 text-[14px] whitespace-nowrap ${isDark ? "text-[#D4D4D8]" : "text-[#111111]"}`}>
+                          <ServiceIcon size={14} weight="duotone" color={svcColor} />
                           {job.serviceType}
                         </span>
                       </td>
-                      <td className="px-3 py-2.5">
+                      <td className={`px-3 ${cellPy}`}>
                         <div className="flex items-center gap-1.5 min-w-0">
-                          <Avatar src={TECHNICIAN_AVATARS[job.technician]} sx={{ width: 22, height: 22, fontSize: "0.55rem", flexShrink: 0 }} />
-                          <span className={`text-[13.5px] truncate ${isDark ? "text-[#D4D4D8]" : "text-slate-700"}`}>{job.technician}</span>
+                          <Avatar src={TECHNICIAN_AVATARS[job.technician]} sx={{ width: 24, height: 24, fontSize: "0.55rem", flexShrink: 0 }} />
+                          <span className={`text-[14px] truncate ${isDark ? "text-[#D4D4D8]" : "text-[#111111]"}`}>{job.technician}</span>
                         </div>
                       </td>
-                      <td className="px-3 py-2.5"><PriorityPill priority={job.priority} isDark={isDark} /></td>
-                      <td className="px-3 py-2.5"><StatusPill status={job.status} isDark={isDark} /></td>
-                      <td className="px-3 py-2.5">
-                        <p className={`m-0 text-[13px] font-medium whitespace-nowrap ${isDark ? "text-[#D4D4D8]" : "text-slate-700"}`}>{job.etaLabel}</p>
-                        <p className={`m-0 text-[11.5px] whitespace-nowrap flex items-center gap-1 ${job.slaBreached ? "text-red-500 font-semibold" : isDark ? "text-[#71717A]" : "text-slate-400"}`}>
+                      <td className={`px-3 ${cellPy}`}><PriorityPill priority={job.priority} isDark={isDark} /></td>
+                      <td className={`px-3 ${cellPy}`}><StatusPill status={job.status} isDark={isDark} /></td>
+                      <td className={`px-3 ${cellPy}`}>
+                        <p className={`m-0 text-[13.5px] font-medium whitespace-nowrap ${isDark ? "text-[#D4D4D8]" : "text-[#111111]"}`}>{job.etaLabel}</p>
+                        <p className={`m-0 text-[12px] whitespace-nowrap flex items-center gap-1 ${job.slaBreached ? (isDark ? "text-red-500" : "text-[#FD3741]") + " font-semibold" : isDark ? "text-[#71717A]" : "text-[#6B6B6B]"}`}>
                           {job.slaBreached && <WarningCircle size={11} weight="fill" />}
                           {job.slaLabel}
                         </p>
                       </td>
-                      <td className="px-3 py-2.5" onClick={e => e.stopPropagation()}>
-                        <div className="flex items-center justify-end gap-0.5 w-full opacity-0 group-hover:opacity-100 transition-opacity">
+                      <td className={`px-3 ${cellPy} ${isDark ? "" : "rounded-r-lg"}`} onClick={e => e.stopPropagation()}>
+                        <div className={`flex items-center justify-end gap-0.5 w-full transition-opacity ${isDark ? "opacity-0 group-hover:opacity-100" : ""}`}>
                           <Tooltip title="View">
                             <IconButton size="small" onClick={() => router.push(`/jobs/${job.id}`)}
-                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)" } }}>
-                              <Eye size={15} color="#94A3B8" weight="duotone" />
+                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "var(--serviceops-secondary-10)" } }}>
+                              <Eye size={16} color={isDark ? "#94A3B8" : "#111111"} weight={isDark ? "duotone" : "regular"} />
                             </IconButton>
                           </Tooltip>
                           <Tooltip title="Actions">
                             <IconButton size="small" onClick={e => setRowMenu({ anchor: e.currentTarget, id: job.id })}
-                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "var(--serviceops-tint)" } }}>
-                              <DotsThreeVertical size={15} color="#94A3B8" weight="duotone" />
+                              sx={{ borderRadius: "6px", p: 0.6, "&:hover": { bgcolor: isDark ? "#27272A" : "var(--serviceops-secondary-10)" } }}>
+                              <DotsThreeVertical size={16} color={isDark ? "#94A3B8" : "#111111"} weight={isDark ? "duotone" : "bold"} />
                             </IconButton>
                           </Tooltip>
                         </div>
@@ -440,11 +460,11 @@ export default function JobsPage() {
                 {pageRows.length === 0 && (
                   <tr>
                     <td colSpan={9} className="py-16 text-center">
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3 ${isDark ? "bg-[#27272A]" : "bg-[#f9fbff]"}`}>
-                        <Wrench size={22} color={isDark ? "#3F3F46" : "#94A3B8"} weight="duotone" />
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3 ${isDark ? "bg-[#27272A]" : "bg-[var(--serviceops-primary-10)]"}`}>
+                        <Wrench size={22} color={isDark ? "#3F3F46" : "var(--serviceops-primary)"} weight="duotone" />
                       </div>
-                      <p className={`font-heading text-sm font-semibold ${isDark ? "text-[#9CA3AF]" : "text-slate-500"}`}>No jobs found</p>
-                      <p className={`text-xs mt-1 ${isDark ? "text-[#3F3F46]" : "text-slate-300"}`}>Try adjusting your search or filters</p>
+                      <p className={`font-heading text-sm font-semibold ${isDark ? "text-[#9CA3AF]" : "text-[#111111]"}`}>No jobs found</p>
+                      <p className={`text-xs mt-1 ${isDark ? "text-[#3F3F46]" : "text-[#6B6B6B]"}`}>Try adjusting your search or filters</p>
                     </td>
                   </tr>
                 )}
@@ -453,8 +473,8 @@ export default function JobsPage() {
           </div>
 
           {/* -- Pagination footer -- */}
-          <div className={`flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-tint)]"}`}>
-            <p className={`m-0 text-[12.5px] ${isDark ? "text-[#71717A]" : "text-slate-500"}`}>
+          <div className={`flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-soft)]"}`}>
+            <p className={`m-0 text-[13px] ${isDark ? "text-[#71717A]" : "text-[#6B6B6B]"}`}>
               {filtered.length === 0 ? "No entries" : `Showing ${(safePage - 1) * PAGE_SIZE + 1} to ${Math.min(safePage * PAGE_SIZE, filtered.length)} of ${filtered.length} entries`}
             </p>
             <div className="flex items-center gap-1">
@@ -463,13 +483,13 @@ export default function JobsPage() {
                 <ArrowLeft size={13} weight="bold" />
               </IconButton>
               {pageList(safePage, totalPages).map((p, i) => p === "…" ? (
-                <span key={`gap-${i}`} className={`px-1.5 text-[12.5px] ${isDark ? "text-[#52525B]" : "text-slate-300"}`}>…</span>
+                <span key={`gap-${i}`} className={`px-1.5 text-[12.5px] ${isDark ? "text-[#52525B]" : "text-[#9A9A9A]"}`}>…</span>
               ) : (
                 <button key={p} onClick={() => setPage(p)}
-                  className={`min-w-[28px] h-7 px-1.5 rounded-lg text-[12.5px] font-medium transition-colors ${
+                  className={`min-w-[28px] h-7 px-1.5 rounded-lg text-[13px] font-medium transition-colors ${
                     p === safePage
-                      ? "bg-[var(--serviceops-primary)] text-[#3B1F00]"
-                      : isDark ? "text-[#D4D4D8] hover:bg-[#27272A]" : "text-slate-600 hover:bg-[var(--serviceops-tint)]"
+                      ? `bg-[var(--serviceops-primary)] ${isDark ? "text-[#3B1F00]" : "text-white"}`
+                      : isDark ? "text-[#D4D4D8] hover:bg-[#27272A]" : "text-[#3D3D3D] hover:bg-[var(--serviceops-primary-10)]"
                   }`}>
                   {p}
                 </button>
@@ -485,8 +505,8 @@ export default function JobsPage() {
         {/* -- Charts row -- */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Jobs by Status */}
-          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
-            <p className={`font-heading text-[14px] font-bold mb-4 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>Jobs by Status</p>
+          <div className={`rounded-2xl border p-5 ${isDark ? "shadow-sm bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
+            <p className={`font-heading text-[16px] font-semibold mb-4 ${isDark ? "text-[#F4F4F5]" : "text-[#111111]"}`}>Jobs by Status</p>
             <div className="flex items-center gap-4">
               <div className="relative w-[132px] h-[132px] flex-shrink-0">
                 <ResponsiveContainer width="100%" height="100%">
@@ -501,17 +521,17 @@ export default function JobsPage() {
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className={`text-[18px] font-extrabold leading-none ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>{kpis.total.toLocaleString()}</span>
-                  <span className={`text-[10px] mt-0.5 ${isDark ? "text-[#71717A]" : "text-slate-400"}`}>Total</span>
+                  <span className={`text-[18px] font-extrabold leading-none ${isDark ? "text-[#F4F4F5]" : "text-[#111111]"}`}>{kpis.total.toLocaleString()}</span>
+                  <span className={`text-[10px] mt-0.5 ${isDark ? "text-[#71717A]" : "text-[#6B6B6B]"}`}>Total</span>
                 </div>
               </div>
               <div className="flex-1 min-w-0 space-y-1.5">
                 {statusChartData.map(d => (
                   <div key={d.name} className="flex items-center gap-1.5 text-[12px]">
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: isDark ? STATUS_META[d.name as JobStatus].dark : STATUS_META[d.name as JobStatus].light }} />
-                    <span className={`flex-1 truncate ${isDark ? "text-[#D4D4D8]" : "text-slate-600"}`}>{d.name}</span>
-                    <span className={`font-semibold ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>{d.value}</span>
-                    <span className={isDark ? "text-[#52525B]" : "text-slate-400"}>({kpis.total ? Math.round((d.value / kpis.total) * 100) : 0}%)</span>
+                    <span className={`flex-1 truncate ${isDark ? "text-[#D4D4D8]" : "text-[#3D3D3D]"}`}>{d.name}</span>
+                    <span className={`font-semibold ${isDark ? "text-[#F4F4F5]" : "text-[#111111]"}`}>{d.value}</span>
+                    <span className={isDark ? "text-[#52525B]" : "text-[#9A9A9A]"}>({kpis.total ? Math.round((d.value / kpis.total) * 100) : 0}%)</span>
                   </div>
                 ))}
               </div>
@@ -519,15 +539,15 @@ export default function JobsPage() {
           </div>
 
           {/* Jobs by Service Type */}
-          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
-            <p className={`font-heading text-[14px] font-bold mb-2 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>Jobs by Service Type</p>
+          <div className={`rounded-2xl border p-5 ${isDark ? "shadow-sm bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
+            <p className={`font-heading text-[16px] font-semibold mb-2 ${isDark ? "text-[#F4F4F5]" : "text-[#111111]"}`}>Jobs by Service Type</p>
             <ResponsiveContainer width="100%" height={216}>
               <BarChart data={serviceChartData} layout="vertical" margin={{ top: 0, right: 28, left: 0, bottom: 0 }} barSize={12}>
                 <XAxis type="number" hide />
-                <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: isDark ? "#A1A1AA" : "#64748B", fontWeight: 500 }} axisLine={false} tickLine={false} width={110} />
-                <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ fill: isDark ? "#18181B" : "var(--serviceops-tint)" }} />
+                <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: isDark ? "#A1A1AA" : "#6B6B6B", fontWeight: 500 }} axisLine={false} tickLine={false} width={110} />
+                <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ fill: isDark ? "#18181B" : "var(--serviceops-primary-10)" }} />
                 <Bar dataKey="value" radius={[0, 6, 6, 0]}>
-                  <LabelList dataKey="value" position="right" style={{ fontSize: 10.5, fontWeight: 600, fill: isDark ? "#A1A1AA" : "#64748B" }} />
+                  <LabelList dataKey="value" position="right" style={{ fontSize: 10.5, fontWeight: 600, fill: isDark ? "#A1A1AA" : "#6B6B6B" }} />
                   {serviceChartData.map(d => (
                     <Cell key={d.name} fill={isDark ? SERVICE_TYPE_META[d.name as ServiceType].dark : SERVICE_TYPE_META[d.name as ServiceType].light} />
                   ))}
@@ -537,13 +557,13 @@ export default function JobsPage() {
           </div>
 
           {/* Jobs Trend */}
-          <div className={`rounded-2xl border shadow-sm p-5 ${isDark ? "bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
-            <p className={`font-heading text-[14px] font-bold mb-2 ${isDark ? "text-[#F4F4F5]" : "text-slate-800"}`}>Jobs Trend (This Week)</p>
+          <div className={`rounded-2xl border p-5 ${isDark ? "shadow-sm bg-[#0A0A0A] border-[#27272A]" : "bg-white border-[var(--serviceops-soft)]"}`}>
+            <p className={`font-heading text-[16px] font-semibold mb-2 ${isDark ? "text-[#F4F4F5]" : "text-[#111111]"}`}>Jobs Trend (This Week)</p>
             <ResponsiveContainer width="100%" height={216}>
               <LineChart data={trendData} margin={{ top: 10, right: 8, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#27272A" : "var(--serviceops-soft)"} vertical={false} />
-                <XAxis dataKey="day" tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#9CA3AF" }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#94A3B8" }} axisLine={false} tickLine={false} width={30} />
+                <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#27272A" : "#F0F0F0"} vertical={false} />
+                <XAxis dataKey="day" tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#6B6B6B" }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 10.5, fill: isDark ? "#A1A1AA" : "#6B6B6B" }} axisLine={false} tickLine={false} width={30} />
                 <RTooltip formatter={(v: number) => [`${v} jobs`, ""]} contentStyle={{ borderRadius: 10, fontSize: 12, border: `1px solid ${isDark ? "#27272A" : "var(--serviceops-soft)"}`, backgroundColor: isDark ? "#18181B" : "#fff" }} cursor={{ stroke: "var(--serviceops-primary)", strokeWidth: 1, strokeDasharray: "4 3" }} />
                 <Line type="monotone" dataKey="jobs" stroke="var(--serviceops-primary)" strokeWidth={2.5} dot={{ r: 3, fill: "var(--serviceops-primary)" }} activeDot={{ r: 5 }} />
               </LineChart>

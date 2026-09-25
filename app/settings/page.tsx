@@ -1433,7 +1433,7 @@ function PermissionPanel() {
       )}
       {tab === "matrix" && (
         <div className={`hidden md:block flex-1 overflow-auto mx-6 mb-4 rounded-b-2xl rounded-tr-2xl border shadow-sm ${isDark ? "bg-[#1C1C1E] border-[#27272A]" : "bg-white border-[#E3ECFC]"}`}>
-          <table className="w-full border-collapse text-left" style={{ minWidth: 900 }}>
+          <table className="so-table w-full border-collapse text-left" style={{ minWidth: 900 }}>
             <thead>
               <tr className={`border-b ${isDark ? "bg-[#111113] border-[#27272A]" : "bg-[#f9fbff] border-[#E3ECFC]"}`}>
                 <th className={`sticky left-0 z-10 px-5 py-3 text-[11px] font-bold uppercase tracking-wider w-[160px] border-r ${isDark ? "bg-[#111113] text-[#9CA3AF] border-[#27272A]" : "bg-[#f9fbff] text-slate-600 border-[#E3ECFC]"}`}>
@@ -2731,7 +2731,7 @@ function ModuleDetail({ modKey, onBack, onSelect, onOpenLayout, initialTab = "la
                 </Button>
               </div>
               <div className="border border-[#E3ECFC] rounded-xl overflow-x-auto">
-                <table className="w-full min-w-[560px] border-collapse text-left">
+                <table className="so-table w-full min-w-[560px] border-collapse text-left">
                   <thead>
                     <tr className="bg-[#f9fbff] border-b border-[#E3ECFC]">
                       <th className="px-4 py-3 text-[12.5px] font-bold text-slate-500 uppercase tracking-wider">Name</th>
@@ -2878,7 +2878,7 @@ function ModuleDetail({ modKey, onBack, onSelect, onOpenLayout, initialTab = "la
 
                   {/* Table */}
                   <div className="border border-[#E3ECFC] rounded-xl overflow-x-auto">
-                    <table className="w-full min-w-[560px] border-collapse text-left">
+                    <table className="so-table w-full min-w-[560px] border-collapse text-left">
                       <thead>
                         <tr className="bg-[#f9fbff] border-b border-[#E3ECFC]">
                           <th className="px-4 py-3 text-[12.5px] font-bold text-slate-500 uppercase tracking-wider">Fields</th>
@@ -2939,7 +2939,7 @@ function ModuleDetail({ modKey, onBack, onSelect, onOpenLayout, initialTab = "la
 
                   {/* Table */}
                   <div className="border border-[#E3ECFC] rounded-xl overflow-x-auto">
-                    <table className="w-full min-w-[480px] border-collapse text-left">
+                    <table className="so-table w-full min-w-[480px] border-collapse text-left">
                       <thead>
                         <tr className="bg-[#f9fbff] border-b border-[#E3ECFC]">
                           <th className="px-4 py-3 text-[11.5px] font-bold text-slate-500 uppercase tracking-wider w-[40%]">Fields</th>
@@ -3196,7 +3196,7 @@ function ModulesAndFieldsPanel() {
 
       {/* Table */}
       <div className="overflow-x-auto">
-      <table className="w-full min-w-[720px] border-collapse text-left">
+      <table className="so-table w-full min-w-[720px] border-collapse text-left">
         <thead>
           <tr className={isDark ? "bg-[#111113] border-b border-[#27272A]" : "bg-[#f9fbff] border-b border-[#E3ECFC]"}>
             <th className={`px-6 py-3 text-[12.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-slate-500"}`}>Displayed In Tabs As</th>

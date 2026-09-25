@@ -514,7 +514,7 @@ export default function DealDetail({ dealId }: { dealId: number }) {
                       </IconButton>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full min-w-[600px]">
+                      <table className="so-table w-full min-w-[600px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             {["Stage","Amount","Probability (%)","Expected Revenue","Stage Duration (Days)","Moved From","Is Current"].map(h => (
@@ -559,7 +559,7 @@ export default function DealDetail({ dealId }: { dealId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full">
+                      <table className="so-table w-full">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             <th className={`text-left py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#ABABAD]" : "text-[#0C2472]"}`}>Subject</th>

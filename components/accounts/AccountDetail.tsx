@@ -359,7 +359,7 @@ export default function AccountDetail({ accountId }: { accountId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full text-[14px]">
+                      <table className="so-table w-full text-[14px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             <th className={`text-left py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[#0C2472]"}`}>Subject</th>
@@ -449,7 +449,7 @@ export default function AccountDetail({ accountId }: { accountId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full text-[14px] min-w-[640px]">
+                      <table className="so-table w-full text-[14px] min-w-[640px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             {["Deal Name", "Amount", "Stage", "Probability (%)", "Closing Date", "Type", "Deal Owner"].map(h => (
@@ -494,7 +494,7 @@ export default function AccountDetail({ accountId }: { accountId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full text-[14px] min-w-[580px]">
+                      <table className="so-table w-full text-[14px] min-w-[580px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             {["First Name", "Last Name", "Email", "Mobile", "Phone", "Fax", "Contact Owner"].map(h => (
@@ -539,7 +539,7 @@ export default function AccountDetail({ accountId }: { accountId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full text-[14px] min-w-[540px]">
+                      <table className="so-table w-full text-[14px] min-w-[540px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             {["Account Name", "Phone", "Website", "Account Type", "Industry", "Account Owner"].map(h => (

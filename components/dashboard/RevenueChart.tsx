@@ -48,32 +48,32 @@ export default function RevenueChart({ isDark = false }: { isDark?: boolean }) {
       style={{
         backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
         borderColor: isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)",
-        boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
+        boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(17,17,17,0.08)",
       }}>
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h3 className={`m-0 text-[14px] font-bold ${isDark ? "text-[#FFF3D6]" : "text-[#78350F]"}`}>Revenue Trend</h3>
-          <p className={`text-[12px] mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>Booked revenue · last 6 months</p>
+          <h3 className={`m-0 text-[14px] font-bold ${isDark ? "text-[#FFF3D6]" : "text-[#111111]"}`}>Revenue Trend</h3>
+          <p className={`text-[12px] mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>Booked revenue · last 6 months</p>
         </div>
-        <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full ${isDark ? "bg-[#2D180D] text-[#FCD34D]" : "bg-[#FAF2DB] text-[#78350F]"}`}>
+        <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full ${isDark ? "bg-[#2D180D] text-[#FCD34D]" : "bg-[#F7F7F7] text-[#111111]"}`}>
           ↑ 30.4% growth
         </span>
       </div>
 
       <ResponsiveContainer width="100%" height={210}>
         <AreaChart data={data} margin={{ top: 10, right: 8, left: -8, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#4B2F1C" : "#FDE68A"} vertical={false} />
-          <ReferenceLine y={avg} stroke={isDark ? "#4B2F1C" : "#FDE68A"} strokeDasharray="4 3" label={{ value: "avg", fontSize: 9, fill: isDark ? "#D0A966" : "#9B6F3F" }} />
+          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#4B2F1C" : "#F0F0F0"} vertical={false} />
+          <ReferenceLine y={avg} stroke={isDark ? "#4B2F1C" : "#E5E5E5"} strokeDasharray="4 3" label={{ value: "avg", fontSize: 9, fill: isDark ? "#D0A966" : "#6B6B6B" }} />
           <XAxis
             dataKey="month"
-            tick={{ fontSize: 11, fill: isDark ? "#D0A966" : "#9B6F3F", fontWeight: 500 }}
+            tick={{ fontSize: 11, fill: isDark ? "#D0A966" : "#6B6B6B", fontWeight: 500 }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
             tickFormatter={fmt}
-            tick={{ fontSize: 11, fill: isDark ? "#D0A966" : "#9B6F3F" }}
+            tick={{ fontSize: 11, fill: isDark ? "#D0A966" : "#6B6B6B" }}
             axisLine={false}
             tickLine={false}
             width={46}

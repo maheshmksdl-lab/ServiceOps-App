@@ -82,7 +82,7 @@ export default function Sidebar() {
           onClick={closeDrawer}
           style={{
             position: "fixed", inset: 0, zIndex: 90,
-            backgroundColor: "rgba(120, 53, 15, 0.35)",
+            backgroundColor: "rgba(17, 17, 17, 0.35)",
             backdropFilter: "blur(2px)",
             opacity: drawerOpen ? 1 : 0,
             pointerEvents: drawerOpen ? "auto" : "none",
@@ -96,8 +96,8 @@ export default function Sidebar() {
             position: "fixed", top: 0, left: 0,
             width: "min(280px, 85vw)", height: "100vh",
             zIndex: 100,
-            backgroundColor: isDark ? "var(--serviceops-surface)" : "#ffffff",
-            boxShadow: isDark ? "4px 0 24px rgba(0,0,0,0.45)" : "4px 0 24px rgba(120,53,15,0.08)",
+            backgroundColor: isDark ? "var(--serviceops-surface)" : "var(--bg-sidebar)",
+            boxShadow: isDark ? "4px 0 24px rgba(0,0,0,0.45)" : "4px 0 24px rgba(17, 17, 17, 0.08)",
             display: "flex", flexDirection: "column",
             transform: drawerOpen ? "translateX(0)" : "translateX(-100%)",
             transition: "transform 0.28s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -109,7 +109,7 @@ export default function Sidebar() {
             <button
               onClick={closeDrawer}
               className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-150 flex-shrink-0 ${
-                isDark ? "text-[var(--serviceops-primary)] hover:text-[var(--serviceops-hover)] hover:bg-[var(--serviceops-tint)]" : "text-[var(--serviceops-depth)] hover:text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-tint)]"
+                isDark ? "text-[var(--serviceops-primary)] hover:text-[var(--serviceops-hover)] hover:bg-[var(--serviceops-tint)]" : "text-[var(--serviceops-depth)] hover:text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-secondary-10)]"
               }`}
               aria-label="Close menu"
             >
@@ -143,7 +143,7 @@ export default function Sidebar() {
                     transition-all duration-150 group
                     ${isDark
                       ? (active ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]" : "text-[var(--serviceops-muted)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]")
-                      : (active ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-depth)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]")
+                      : (active ? "bg-[var(--serviceops-primary-10)] text-[var(--serviceops-depth)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-secondary-10)] hover:text-[var(--serviceops-primary)]")
                     }
                   `}
                 >
@@ -159,7 +159,7 @@ export default function Sidebar() {
                   <span className="flex-1 truncate">{label}</span>
                   {badge && !active && (
                     <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none ${
-                      isDark ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]" : "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]"
+                      isDark ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]" : "bg-[var(--serviceops-primary-10)] text-[var(--serviceops-primary)]"
                     }`}>
                       {badge}
                     </span>
@@ -178,13 +178,13 @@ export default function Sidebar() {
               href="/settings"
               onClick={closeDrawer}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[16px] font-medium transition-all duration-150 group ${
-                isDark ? "text-[var(--serviceops-secondary)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]"
+                isDark ? "text-[var(--serviceops-secondary)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-secondary-10)] hover:text-[var(--serviceops-primary)]"
               }`}
             >
               <GearSixIcon size={19} weight="duotone" className={`flex-shrink-0 ${isDark ? "text-[var(--serviceops-muted)] group-hover:text-[var(--serviceops-primary)]" : "text-[var(--serviceops-muted)] group-hover:text-[var(--serviceops-primary)]"}`} />
               Settings
             </Link>
-              <div className={`flex items-center gap-2.5 mt-1 px-3 py-2 rounded-xl border ${isDark ? "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]" : "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]"}`}>
+              <div className={`flex items-center gap-2.5 mt-1 px-3 py-2 rounded-xl border ${isDark ? "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]" : "bg-[var(--bg-card)] border-[var(--serviceops-soft)]"}`}>
               <div className="relative flex-shrink-0">
                 <Avatar
                   src={OWNER_AVATARS["PM SDL"]}
@@ -212,7 +212,7 @@ export default function Sidebar() {
       style={{
         top: "72px",
         height: "calc(100vh - 72px)",
-        backgroundColor: isDark ? "var(--bg-sidebar)" : "#ffffff",
+        backgroundColor: "var(--bg-sidebar)",
         width: collapsed ? "68px" : "260px",
         transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, border-color 0.2s ease",
       }}
@@ -235,7 +235,7 @@ export default function Sidebar() {
                 }
                 ${isDark
                   ? (active ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]" : "text-[var(--serviceops-secondary)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]")
-                  : (active ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-depth)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]")
+                  : (active ? "bg-[var(--serviceops-primary-10)] text-[var(--serviceops-depth)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-secondary-10)] hover:text-[var(--serviceops-primary)]")
                 }
               `}
             >
@@ -253,7 +253,7 @@ export default function Sidebar() {
                   <span className="flex-1 truncate">{label}</span>
                   {badge && !active && (
                     <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none ${
-                      isDark ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]" : "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]"
+                      isDark ? "bg-[var(--serviceops-tint)] text-[var(--serviceops-primary)]" : "bg-[var(--serviceops-primary-10)] text-[var(--serviceops-primary)]"
                     }`}>
                       {badge}
                     </span>
@@ -287,7 +287,7 @@ export default function Sidebar() {
               <Link
                 href="/settings"
                 className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-150 ${
-                  isDark ? "text-[var(--serviceops-muted)] hover:text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-tint)]" : "text-[var(--serviceops-depth)] hover:text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-tint)]"
+                  isDark ? "text-[var(--serviceops-muted)] hover:text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-tint)]" : "text-[var(--serviceops-depth)] hover:text-[var(--serviceops-primary)] hover:bg-[var(--serviceops-secondary-10)]"
                 }`}
               >
                 <GearSixIcon size={18} weight="duotone" />
@@ -298,7 +298,7 @@ export default function Sidebar() {
           <Link
             href="/settings"
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[16px] font-medium transition-all duration-150 ${
-              isDark ? "text-[var(--serviceops-secondary)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]"
+              isDark ? "text-[var(--serviceops-secondary)] hover:bg-[var(--serviceops-tint)] hover:text-[var(--serviceops-primary)]" : "text-[var(--serviceops-depth)] hover:bg-[var(--serviceops-secondary-10)] hover:text-[var(--serviceops-primary)]"
             }`}
           >
             <GearSixIcon size={18} weight="duotone" className={`flex-shrink-0 ${isDark ? "text-[var(--serviceops-muted)]" : "text-[var(--serviceops-muted)]"}`} />
@@ -319,7 +319,7 @@ export default function Sidebar() {
             </span>
           </Tooltip>
         ) : (
-          <div className={`flex items-center gap-2.5 mt-1 px-3 py-2 rounded-lg border ${isDark ? "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]" : "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]"}`}>
+          <div className={`flex items-center gap-2.5 mt-1 px-3 py-2 rounded-lg border ${isDark ? "bg-[var(--serviceops-tint)] border-[var(--serviceops-soft)]" : "bg-[var(--bg-card)] border-[var(--serviceops-soft)]"}`}>
             <div className="relative flex-shrink-0">
               <Avatar
                 src={OWNER_AVATARS["PM SDL"]}

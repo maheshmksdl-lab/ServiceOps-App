@@ -70,7 +70,7 @@ export default function TopBar({ title }: { title?: string }) {
 
       {/* Search - hidden on mobile, visible md+ */}
       <div className={`hidden md:flex items-center gap-2 border rounded-xl px-2.5 sm:px-3 py-1.5 w-56 lg:w-60 group transition-all ${isDark ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]" : "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"}`}>
-        <MagnifyingGlass size={14} color={isDark ? "#9CA3AF" : "#737373"} weight="duotone" />
+        <MagnifyingGlass size={14} color={isDark ? "#9CA3AF" : "#6B6B6B"} weight="duotone" />
         <InputBase
           placeholder="Search leads, deals..."
           value={search}
@@ -78,8 +78,8 @@ export default function TopBar({ title }: { title?: string }) {
           sx={{
             flex: 1,
             fontSize: "0.8rem",
-            color: isDark ? "#D4D4D8" : "#334155",
-            "& input::placeholder": { color: "#94A3B8", opacity: 1 },
+            color: isDark ? "#D4D4D8" : "#3D3D3D",
+            "& input::placeholder": { color: "#9A9A9A", opacity: 1 },
           }}
         />
         <Tooltip title="Cmd+K">
@@ -118,7 +118,7 @@ export default function TopBar({ title }: { title?: string }) {
             color="error"
             sx={{ "& .MuiBadge-badge": { fontSize: "0.58rem", height: 15, minWidth: 15, padding: "0 3px" } }}
           >
-            <Bell size={18} color={isDark ? "#9CA3AF" : "#64748B"} weight="duotone" />
+            <Bell size={18} color={isDark ? "#9CA3AF" : "#6B6B6B"} weight="duotone" />
           </Badge>
         </IconButton>
       </Tooltip>
@@ -129,7 +129,7 @@ export default function TopBar({ title }: { title?: string }) {
           src={OWNER_AVATARS["PM SDL"]}
           onClick={() => setProfileOpen(p => !p)}
           sx={{ width: { xs: 28, sm: 32 }, height: { xs: 28, sm: 32 }, bgcolor: isDark ? "var(--serviceops-tint)" : "var(--serviceops-tint)", fontSize: "0.55rem", fontWeight: 800, cursor: "pointer" }}
-          className={`ring-2 transition-all ${profileOpen ? (isDark ? "ring-[#D4D4D8]" : "ring-[#4A7AE8]") : "ring-transparent"} ${isDark ? "hover:ring-[#D4D4D8]" : "hover:ring-[#4A7AE8]"}`}
+          className={`ring-2 transition-all ${profileOpen ? (isDark ? "ring-[#D4D4D8]" : "ring-[#F59E0B]") : "ring-transparent"} ${isDark ? "hover:ring-[#D4D4D8]" : "hover:ring-[#F59E0B]"}`}
         >
           PM
         </Avatar>
@@ -142,7 +142,7 @@ export default function TopBar({ title }: { title?: string }) {
               border: `1px solid ${isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)"}`,
               boxShadow: isDark
                 ? "0 16px 40px rgba(0,0,0,0.6)"
-                : "0 16px 40px rgba(29,78,216,0.12), 0 4px 12px rgba(0,0,0,0.06)",
+                : "0 16px 40px rgba(17,17,17,0.12), 0 4px 12px rgba(0,0,0,0.06)",
             }}
           >
             {/* Profile info */}

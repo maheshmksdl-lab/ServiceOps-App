@@ -12,12 +12,12 @@ import {
 } from "recharts";
 
 const STAGES_LIGHT = [
-  { name: "Qualification", deals: 425, color: "#78350F" },
-  { name: "Needs Analysis", deals: 287, color: "#D97706" },
-  { name: "Value Prop.", deals: 198, color: "#F59E0B" },
-  { name: "Decision", deals: 156, color: "#FBBF24" },
-  { name: "Proposal", deals: 124, color: "#FCD34D" },
-  { name: "Negotiation", deals: 93, color: "#C2410C" },
+  { name: "Qualification", deals: 425, color: "#F59E0B" },
+  { name: "Needs Analysis", deals: 287, color: "#F7B13C" },
+  { name: "Value Prop.", deals: 198, color: "#FACA79" },
+  { name: "Decision", deals: 156, color: "#D2D2D2" },
+  { name: "Proposal", deals: 124, color: "#B4B4B4" },
+  { name: "Negotiation", deals: 93, color: "#6B6B6B" },
 ];
 
 const STAGES_DARK = [
@@ -51,11 +51,11 @@ export default function DealStageChart({ isDark = false }: { isDark?: boolean })
       style={{
         backgroundColor: isDark ? "var(--bg-card)" : "#ffffff",
         borderColor: isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)",
-        boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(120,53,15,0.08)",
+        boxShadow: isDark ? "0 8px 32px rgba(0, 0, 0, 0.24)" : "0 8px 32px rgba(17,17,17,0.08)",
       }}>
       <div className="mb-5">
-        <h3 className={`m-0 text-[14px] font-bold ${isDark ? "text-[#FFF3D6]" : "text-[#78350F]"}`}>Pipeline by Stage</h3>
-        <p className={`text-[12px] mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>Active deals distribution</p>
+        <h3 className={`m-0 text-[14px] font-bold ${isDark ? "text-[#FFF3D6]" : "text-[#111111]"}`}>Pipeline by Stage</h3>
+        <p className={`text-[12px] mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>Active deals distribution</p>
       </div>
 
       <ResponsiveContainer width="100%" height={210}>
@@ -69,12 +69,12 @@ export default function DealStageChart({ isDark = false }: { isDark?: boolean })
           <YAxis
             type="category"
             dataKey="name"
-            tick={{ fontSize: 11, fill: isDark ? "#D0A966" : "#9B6F3F", fontWeight: 500 }}
+            tick={{ fontSize: 11, fill: isDark ? "#D0A966" : "#6B6B6B", fontWeight: 500 }}
             axisLine={false}
             tickLine={false}
             width={82}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: isDark ? "#2D180D" : "#FAF2DB" }} />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: isDark ? "#2D180D" : "#F7F7F7" }} />
           <Bar dataKey="deals" radius={[0, 6, 6, 0]}>
             <LabelList
               dataKey="deals"

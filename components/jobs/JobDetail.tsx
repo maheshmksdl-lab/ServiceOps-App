@@ -840,13 +840,13 @@ export default function JobDetail({ jobId }: { jobId: number }) {
                     </div>
                   }>
                   <div className="overflow-x-auto -mx-5 px-5">
-                    <table className="w-full text-[13px] border-collapse">
+                    <table className="so-table w-full text-[13px] border-collapse">
                       <thead>
                         <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-soft)]"}`}>
-                          <th className={`text-left py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Item</th>
-                          <th className={`text-right py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Qty</th>
-                          <th className={`text-right py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Rate (₹)</th>
-                          <th className={`text-right py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Amount (₹)</th>
+                          <th className={`text-left py-2 px-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Item</th>
+                          <th className={`text-right py-2 px-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Qty</th>
+                          <th className={`text-right py-2 px-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Rate (₹)</th>
+                          <th className={`text-right py-2 px-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>Amount (₹)</th>
                           <th className="w-6" />
                         </tr>
                       </thead>
@@ -1004,11 +1004,11 @@ export default function JobDetail({ jobId }: { jobId: number }) {
               <div id="section-related-jobs">
                 <SectionCard icon={LinkSimple} title="Related Jobs" action={<DotsAction />}>
                   <div className="overflow-x-auto -mx-5 px-5">
-                    <table className="w-full text-[14px] min-w-[560px]">
+                    <table className="so-table w-full text-[14px] min-w-[560px]">
                       <thead>
                         <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[var(--serviceops-soft)]"}`}>
                           {["Job ID", "Service Type", "Customer", "Status", "ETA"].map(h => (
-                            <th key={h} className={`text-left py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider whitespace-nowrap ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>{h}</th>
+                            <th key={h} className={`text-left py-2 px-4 text-[11.5px] font-bold uppercase tracking-wider whitespace-nowrap ${isDark ? "text-[#71717A]" : "text-[var(--serviceops-depth)]"}`}>{h}</th>
                           ))}
                         </tr>
                       </thead>
@@ -1020,10 +1020,10 @@ export default function JobDetail({ jobId }: { jobId: number }) {
                           return (
                             <tr key={r.jobId} onClick={() => router.push(`/jobs/${r.id}`)}
                               className={`border-b cursor-pointer transition-colors ${isDark ? "border-[#27272A] hover:bg-[#27272A]" : "border-[var(--serviceops-tint)] hover:bg-[rgba(245,158,11,0.05)]"}`}>
-                              <td className={`py-3 pr-4 font-medium hover:underline ${isDark ? "text-[#A1A1AA]" : "text-[var(--serviceops-depth)]"}`}>{r.jobId}</td>
-                              <td className={`py-3 pr-4 ${isDark ? "text-[#A1A1AA]" : "text-slate-600"}`}>{r.label}</td>
-                              <td className={`py-3 pr-4 ${isDark ? "text-[#A1A1AA]" : "text-slate-600"}`}>{r.customer}</td>
-                              <td className="py-3 pr-4">
+                              <td className={`py-3 px-4 font-medium hover:underline ${isDark ? "text-[#A1A1AA]" : "text-[var(--serviceops-depth)]"}`}>{r.jobId}</td>
+                              <td className={`py-3 px-4 ${isDark ? "text-[#A1A1AA]" : "text-slate-600"}`}>{r.label}</td>
+                              <td className={`py-3 px-4 ${isDark ? "text-[#A1A1AA]" : "text-slate-600"}`}>{r.customer}</td>
+                              <td className="py-3 px-4">
                                 <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ backgroundColor: isDark ? meta.bgDark : meta.bgLight, color: isDark ? meta.dark : meta.light }}>{r.status}</span>
                               </td>
                               <td className={`py-3 pr-4 ${isDark ? "text-[#A1A1AA]" : "text-slate-600"}`}>{r.eta}</td>

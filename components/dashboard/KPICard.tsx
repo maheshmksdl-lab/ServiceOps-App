@@ -55,19 +55,19 @@ export default function KPICard({
       style={{
         backgroundColor: isDark ? "var(--bg-card)" : fill,
         borderColor: isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)",
-        boxShadow: isDark ? "0 6px 24px rgba(0,0,0,0.24)" : "0 6px 24px rgba(120,53,15,0.08)",
+        boxShadow: isDark ? "0 6px 24px rgba(0,0,0,0.24)" : "0 6px 24px rgba(17,17,17,0.08)",
       }}
     >
       <div className="flex flex-col sm:flex-row items-start justify-between gap-3">
         {/* ── Left: label + value + badge ── */}
         <div className="flex-1 min-w-0">
-          <p className={`font-heading text-[10px] sm:text-[11.5px] font-semibold uppercase tracking-[0.1em] mb-2 truncate ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>
+          <p className={`font-heading text-[10px] sm:text-[11.5px] font-semibold uppercase tracking-[0.1em] mb-2 truncate ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>
             {title}
           </p>
-          <p className={`text-xl sm:text-[28px] font-extrabold tracking-tight leading-none mb-3 ${isDark ? "text-[#FFF3D6]" : "text-[#78350F]"}`}>
+          <p className={`text-xl sm:text-[28px] font-extrabold tracking-tight leading-none mb-3 ${isDark ? "text-[#FFF3D6]" : "text-[#111111]"}`}>
             {value}
           </p>
-          <span className={`inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-1 rounded-full ${isDark ? "bg-[#2D180D]" : "bg-[#FFFBEB]"} ${
+          <span className={`inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-1 rounded-full ${isDark ? "bg-[#2D180D]" : "bg-[#F7F7F7]"} ${
             isPositive ? "text-emerald-400" : "text-red-400"
           }`}>
             {isPositive ? "↑" : "↓"} {Math.abs(trend)}% vs last month
@@ -76,7 +76,7 @@ export default function KPICard({
 
         {/* ── Right: icon + sparkline ── */}
         <div className="flex flex-col items-end gap-3 flex-shrink-0">
-          <div className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-sm sm:text-base ${isDark ? "bg-[#22160D] text-[#FBBF24]" : "bg-[#FFFBEB] text-[#78350F]"}`}>
+          <div className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-sm sm:text-base ${isDark ? "bg-[#22160D] text-[#FBBF24]" : "bg-[var(--serviceops-primary-10)] text-[var(--serviceops-primary)]"}`}>
             {icon}
           </div>
 
@@ -102,7 +102,7 @@ export default function KPICard({
 
       {sourceReportId && sourceReportName && (
         <button onClick={(e) => { e.stopPropagation(); router.push(`/reports/${sourceReportId}`); }}
-          className={`w-full flex items-center justify-center gap-1 mt-4 pt-3 border-t text-[10.5px] font-bold transition-colors ${isDark ? "border-[#4B2F1C] text-[#D0A966] hover:text-[#FCD34D]" : "border-[#FDE68A] text-[#9B6F3F] hover:text-[#78350F]"}`}>
+          className={`w-full flex items-center justify-center gap-1 mt-4 pt-3 border-t text-[10.5px] font-bold transition-colors ${isDark ? "border-[#4B2F1C] text-[#D0A966] hover:text-[#FCD34D]" : "border-[#E5E5E5] text-[#6B6B6B] hover:text-[#111111]"}`}>
           <FileText size={11} weight="duotone" />
           <span>Source Report: {sourceReportName}</span>
           <ArrowSquareOut size={10} weight="bold" />

@@ -136,7 +136,7 @@ const ReportPreviewModal = memo(
 
               {/* Table */}
               <div className={`border rounded-lg overflow-x-auto ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
-                <table className="w-full min-w-[600px]">
+                <table className="so-table w-full min-w-[600px]">
                   <thead>
                     <tr className={isDark ? "bg-[#18181B]" : "bg-[#F9FBFF]"}>
                       {previewData.columns.map((col) => (

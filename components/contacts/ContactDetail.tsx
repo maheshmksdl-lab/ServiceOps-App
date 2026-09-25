@@ -631,7 +631,7 @@ export default function ContactDetail({ contactId }: { contactId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full text-[14px]">
+                      <table className="so-table w-full text-[14px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             <th className={`text-left py-2 pr-4 text-[11.5px] font-bold uppercase tracking-wider ${isDark ? "text-[#ABABAD]" : "text-[#0C2472]"}`}>Subject</th>
@@ -721,7 +721,7 @@ export default function ContactDetail({ contactId }: { contactId: number }) {
                       </div>
                     }>
                     <div className="overflow-x-auto -mx-5 px-5">
-                      <table className="w-full text-[14px] min-w-[500px]">
+                      <table className="so-table w-full text-[14px] min-w-[500px]">
                         <thead>
                           <tr className={`border-b ${isDark ? "border-[#27272A]" : "border-[#E3ECFC]"}`}>
                             {["Deal Name", "Amount", "Stage", "Probability (%)", "Closing Date"].map(h => (

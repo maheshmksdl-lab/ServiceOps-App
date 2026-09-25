@@ -424,12 +424,12 @@ function ReportDataSection({
 
   return (
     <WidgetCard title="Report Data" subtitle={subtitle} isDark={isDark} noPadding>
-      <TableContainer>
+      <TableContainer sx={isDark ? undefined : { px: 1.5, pt: 1.5 }}>
         <Table size="small">
           <TableHead>
             <TableRow>
               {columns.map((col) => (
-                <TableCell key={col.name} sx={{ backgroundColor: isDark ? "#111111" : "#EFF6FF", color: isDark ? "#9CA3AF" : "#0C2472", borderBottom: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, fontWeight: 700, fontSize: "11.5px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{col.label}</TableCell>
+                <TableCell key={col.name} sx={{ backgroundColor: isDark ? "#111111" : "#F7F7F7", color: isDark ? "#9CA3AF" : "#111111", borderBottom: `1px solid ${isDark ? "#27272A" : "#E5E5E5"}`, fontWeight: 700, fontSize: "11.5px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{col.label}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -438,13 +438,13 @@ function ReportDataSection({
               <Fragment key={g.key}>
                 {splitAggregates && (
                   <TableRow>
-                    <TableCell colSpan={columns.length} sx={{ bgcolor: isDark ? "#111113" : "#F1F5F9", borderBottom: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, fontWeight: 700, fontSize: "12px", color: isDark ? "#93C5FD" : "#1D4ED8" }}>
+                    <TableCell colSpan={columns.length} sx={{ bgcolor: isDark ? "#111113" : "#F7F7F7", borderBottom: `1px solid ${isDark ? "#27272A" : "#E5E5E5"}`, fontWeight: 700, fontSize: "12px", color: isDark ? "#93C5FD" : "var(--serviceops-primary)" }}>
                       {groupCol?.label}: {g.key} ({g.rows.length})
                     </TableCell>
                   </TableRow>
                 )}
                 {g.rows.map((row, idx) => (
-                  <TableRow key={idx} hover sx={{ "&:hover td": { bgcolor: isDark ? "rgba(255,255,255,0.03)" : "rgba(29,78,216,0.04)" }, "& td": { borderBottom: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, py: "14px", backgroundColor: isDark ? "#18181B" : "#f9fbff" } }}>
+                  <TableRow key={idx} hover sx={{ "&:hover td": { bgcolor: isDark ? "rgba(255,255,255,0.03)" : "#F7F7F7" }, "& td": { borderBottom: `1px solid ${isDark ? "#27272A" : "#E5E5E5"}`, py: "14px", backgroundColor: isDark ? "#18181B" : "#FFFFFF" } }}>
                     {columns.map((col) => (
                       <TableCell key={col.name} sx={{ maxWidth: wrapText ? "none" : 220 }}>
                         <span className={`block text-[13px] ${textClass} ${isDark ? "text-[#D4D4D8]" : "text-slate-700"}`}>{fmtVal(col, row[col.name])}</span>
@@ -455,7 +455,7 @@ function ReportDataSection({
                 {grandTotals && splitAggregates && numericCols.length > 0 && (
                   <TableRow>
                     {columns.map((col, i) => (
-                      <TableCell key={col.name} sx={{ borderBottom: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, borderTop: `1.5px solid ${isDark ? "#3F3F46" : "#CBD5E1"}`, bgcolor: isDark ? "#111113" : "#F8FAFF" }}>
+                      <TableCell key={col.name} sx={{ borderBottom: `1px solid ${isDark ? "#27272A" : "#E5E5E5"}`, borderTop: `1.5px solid ${isDark ? "#3F3F46" : "#E5E5E5"}`, bgcolor: isDark ? "#111113" : "#F7F7F7" }}>
                         <span className={`text-[12.5px] font-bold ${isDark ? "text-[#93C5FD]" : "text-[#1D4ED8]"}`}>
                           {i === 0 ? "Subtotal" : numericCols.includes(col) ? fmtVal(col, sumFor(g.rows, col)) : ""}
                         </span>
@@ -468,7 +468,7 @@ function ReportDataSection({
             {grandTotals && (
               <TableRow>
                 {columns.map((col, i) => (
-                  <TableCell key={col.name} sx={{ borderTop: `2px solid ${isDark ? "#3F3F46" : "#CBD5E1"}`, bgcolor: isDark ? "#111113" : "#EFF6FF" }}>
+                  <TableCell key={col.name} sx={{ borderTop: `2px solid ${isDark ? "#3F3F46" : "#E5E5E5"}`, bgcolor: isDark ? "#111113" : "#F7F7F7" }}>
                     <span className={`text-[13px] font-extrabold ${isDark ? "text-[#F4F4F5]" : "text-[#0C2472]"}`}>
                       {i === 0 ? "Grand Total" : numericCols.includes(col) ? fmtVal(col, sumFor(rows, col)) : ""}
                     </span>

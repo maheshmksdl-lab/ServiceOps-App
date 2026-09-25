@@ -285,7 +285,7 @@ function DealsTable({ isDark }: { isDark: boolean }) {
   };
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-[12px]">
+      <table className="so-table w-full text-[12px]">
         <thead>
           <tr>
             {["Deal", "Amount", "Stage"].map(h => (

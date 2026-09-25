@@ -53,7 +53,7 @@ function UserMenu({
             borderRadius: "16px",
             border: `1px solid ${isDark ? "var(--serviceops-soft)" : "var(--serviceops-soft)"}`,
             bgcolor: isDark ? "var(--serviceops-surface)" : "#ffffff",
-            boxShadow: isDark ? "0 12px 40px rgba(0,0,0,0.35)" : "0 12px 40px rgba(120,53,15,0.12)",
+            boxShadow: isDark ? "0 12px 40px rgba(0,0,0,0.35)" : "0 12px 40px rgba(17,17,17,0.12)",
             overflow: "hidden",
           },
         },
@@ -215,7 +215,7 @@ export default function AppHeader() {
               color="error"
               sx={{ "& .MuiBadge-badge": { fontSize: "0.55rem", height: 16, minWidth: 16, padding: "0 4px" } }}
             >
-              <Bell size={20} color={isDark ? "#9CA3AF" : "#64748B"} weight="duotone" />
+              <Bell size={20} color={isDark ? "#9CA3AF" : "#6B6B6B"} weight="duotone" />
             </Badge>
           </IconButton>
         </Tooltip>
@@ -290,18 +290,18 @@ export default function AppHeader() {
             ? "bg-[var(--serviceops-surface)] border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
             : "bg-slate-50 border-[var(--serviceops-soft)] focus-within:border-[var(--serviceops-primary)] focus-within:border-2 focus-within:shadow-[0_0_0_2px_var(--serviceops-soft)]"
         }`}>
-          <MagnifyingGlass size={15} color={isDark ? "#71717A" : "#94A3B8"} weight="duotone" />
+          <MagnifyingGlass size={15} color={isDark ? "#71717A" : "#9A9A9A"} weight="duotone" />
           <InputBase
             placeholder="Search leads, deals..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             sx={{
-              flex: 1, fontSize: "0.78rem", color: isDark ? "#D4D4D8" : "#334155",
-              "& input::placeholder": { color: isDark ? "#71717A" : "#94A3B8", opacity: 1 },
+              flex: 1, fontSize: "0.78rem", color: isDark ? "#D4D4D8" : "#3D3D3D",
+              "& input::placeholder": { color: isDark ? "#71717A" : "#9A9A9A", opacity: 1 },
             }}
           />
           <Tooltip title="⌘K">
-            <Command size={13} color={isDark ? "#52525B" : "#CBD5E1"} weight="duotone" />
+            <Command size={13} color={isDark ? "#52525B" : "#D2D2D2"} weight="duotone" />
           </Tooltip>
         </div>
 
@@ -316,7 +316,7 @@ export default function AppHeader() {
               color="error"
               sx={{ "& .MuiBadge-badge": { fontSize: "0.58rem", height: 15, minWidth: 15, padding: "0 3px" } }}
             >
-              <Bell size={20} color={isDark ? "#9CA3AF" : "#64748B"} weight="duotone" />
+              <Bell size={20} color={isDark ? "#9CA3AF" : "#6B6B6B"} weight="duotone" />
             </Badge>
           </IconButton>
         </Tooltip>

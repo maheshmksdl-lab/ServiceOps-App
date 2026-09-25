@@ -37,7 +37,7 @@ const kpis = [
     title: "Total Contacts",
     value: "15,432",
     trend: 8.2,
-    fill: "var(--serviceops-tint)",
+    fill: "var(--bg-card)",
     spark: "var(--serviceops-primary)",
     icon: <Users size={18} weight="duotone" />,
     sparkData: [120, 145, 132, 155, 148, 168, 175, 180, 192, 210, 225, 234],
@@ -48,7 +48,7 @@ const kpis = [
     title: "Active Leads",
     value: "12,983",
     trend: 4.7,
-    fill: "var(--serviceops-soft)",
+    fill: "var(--bg-card)",
     spark: "var(--serviceops-action)",
     icon: <Lightning size={18} weight="duotone" />,
     sparkData: [98, 105, 115, 108, 125, 130, 120, 138, 142, 155, 148, 160],
@@ -59,7 +59,7 @@ const kpis = [
     title: "Open Deals",
     value: "1,283",
     trend: 12.1,
-    fill: "var(--serviceops-surface)",
+    fill: "var(--bg-card)",
     spark: "var(--serviceops-primary)",
     icon: <Handshake size={18} weight="duotone" />,
     sparkData: [88, 92, 85, 98, 102, 95, 108, 115, 112, 118, 125, 130],
@@ -70,7 +70,7 @@ const kpis = [
     title: "Booked Revenue",
     value: "₹234.8k",
     trend: 6.3,
-    fill: "var(--serviceops-tint)",
+    fill: "var(--bg-card)",
     spark: "var(--serviceops-depth)",
     icon: <Wallet size={18} weight="duotone" />,
     sparkData: [180, 195, 188, 210, 205, 218, 222, 225, 228, 230, 232, 235],
@@ -81,10 +81,10 @@ const kpis = [
 
 /* ─────────── Quick-stat pills for the banner ─────────── */
 const quickStats = [
-  { label: "Tasks due today",      value: "7",   icon: ClipboardText,  color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
-  { label: "Deals to follow up",  value: "3",   icon: Handshake,      color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
-  { label: "Meetings today",      value: "2",   icon: CalendarBlank,  color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
-  { label: "New leads this week", value: "+84", icon: TrendUp,        color: "bg-white/20 text-white", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "Tasks due today",      value: "7",   icon: ClipboardText,  color: "bg-[#F7F7F7] text-[#111111] border border-[var(--serviceops-soft)]", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "Deals to follow up",  value: "3",   icon: Handshake,      color: "bg-[#F7F7F7] text-[#111111] border border-[var(--serviceops-soft)]", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "Meetings today",      value: "2",   icon: CalendarBlank,  color: "bg-[#F7F7F7] text-[#111111] border border-[var(--serviceops-soft)]", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
+  { label: "New leads this week", value: "+84", icon: TrendUp,        color: "bg-[#F7F7F7] text-[#111111] border border-[var(--serviceops-soft)]", colorDark: "bg-[#FBBF24]/15 text-[#FFF3D6]" },
 ];
 
 export default function DashboardPage() {
@@ -123,12 +123,12 @@ export default function DashboardPage() {
           ═══════════════════════════════════════ */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${isDark ? "bg-[#F59E0B]/20" : "bg-[#FAF2DB]"}`}>
-                <SquaresFour size={18} weight="duotone" color={isDark ? "#FBBF24" : "#78350F"} />
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${isDark ? "bg-[#F59E0B]/20" : "bg-[var(--serviceops-primary-10)]"}`}>
+                <SquaresFour size={18} weight="duotone" color={isDark ? "#FBBF24" : "#F59E0B"} />
               </div>
               <div>
-                <h1 className={`m-0 text-[20px] font-extrabold leading-tight tracking-tight ${isDark ? "text-[#FFF3D6]" : "text-[#78350F]"}`}>Dashboard</h1>
-                <p className={`m-0 text-[12px] leading-tight mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#9B6F3F]"}`}>{selectedDashboard?.name ?? "Dashboard V1"}</p>
+                <h1 className={`m-0 text-[20px] font-extrabold leading-tight tracking-tight ${isDark ? "text-[#FFF3D6]" : "text-[#111111]"}`}>Dashboard</h1>
+                <p className={`m-0 text-[12px] leading-tight mt-0.5 ${isDark ? "text-[#D0A966]" : "text-[#6B6B6B]"}`}>{selectedDashboard?.name ?? "Dashboard V1"}</p>
               </div>
             </div>
 
@@ -136,22 +136,22 @@ export default function DashboardPage() {
               onClick={(e) => setMenuAnchor(e.currentTarget)}
               variant="outlined"
               endIcon={<CaretDown size={13} weight="bold" />}
-              sx={{ textTransform: "none", fontWeight: 700, fontSize: "13px", borderRadius: "9px", color: isDark ? "#FFF3D6" : "#78350F", borderColor: isDark ? "#4B2F1C" : "#FDE68A", bgcolor: isDark ? "#21160D" : "#FFFBEB", "&:hover": { bgcolor: isDark ? "#2D180D" : "#FAF2DB", borderColor: isDark ? "#F59E0B" : "#FBBF24" }, width: { xs: "100%", sm: "auto" } }}>
+              sx={{ textTransform: "none", fontWeight: 700, fontSize: "13px", borderRadius: "9px", color: isDark ? "#FFF3D6" : "#111111", borderColor: isDark ? "#4B2F1C" : "#FDE68A", bgcolor: isDark ? "#21160D" : "#FFFFFF", "&:hover": { bgcolor: isDark ? "#2D180D" : "#F7F7F7", borderColor: isDark ? "#F59E0B" : "#F59E0B" }, width: { xs: "100%", sm: "auto" } }}>
               {selectedDashboard?.name ?? "Select Dashboard"}
             </Button>
 
             <Menu anchorEl={menuAnchor} open={!!menuAnchor} onClose={() => setMenuAnchor(null)}
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               transformOrigin={{ vertical: "top", horizontal: "right" }}
-              PaperProps={{ sx: { mt: 0.75, borderRadius: "12px", minWidth: 220, py: 0.5, bgcolor: isDark ? "#18181B" : "#fff", border: `1px solid ${isDark ? "#27272A" : "#E3ECFC"}`, boxShadow: isDark ? "0 8px 24px rgba(0,0,0,0.45)" : "0 8px 24px rgba(15,23,42,0.12)" } }}>
+              PaperProps={{ sx: { mt: 0.75, borderRadius: "12px", minWidth: 220, py: 0.5, bgcolor: isDark ? "#18181B" : "#fff", border: `1px solid ${isDark ? "#27272A" : "#E5E5E5"}`, boxShadow: isDark ? "0 8px 24px rgba(0,0,0,0.45)" : "0 8px 24px rgba(15,23,42,0.12)" } }}>
               {dashboards.map((d) => (
                 <MenuItem key={d.id} onClick={() => handleSelectDashboard(d.id)} selected={d.id === selectedId}
-                  sx={{ py: 1, px: 1.75, mx: 0.5, borderRadius: "8px", "&.Mui-selected": { bgcolor: isDark ? "#2D180D" : "#FAF2DB" } }}>
-                  <ListItemText primaryTypographyProps={{ fontSize: 13.5, fontWeight: d.id === selectedId ? 700 : 500, color: d.id === selectedId ? (isDark ? "#FBBF24" : "#78350F") : undefined }}>{d.name}</ListItemText>
-                  {d.id === selectedId && <Check size={15} weight="bold" color={isDark ? "#FBBF24" : "#78350F"} />}
+                  sx={{ py: 1, px: 1.75, mx: 0.5, borderRadius: "8px", "&.Mui-selected": { bgcolor: isDark ? "#2D180D" : "#F7F7F7" } }}>
+                  <ListItemText primaryTypographyProps={{ fontSize: 13.5, fontWeight: d.id === selectedId ? 700 : 500, color: d.id === selectedId ? (isDark ? "#FBBF24" : "#111111") : undefined }}>{d.name}</ListItemText>
+                  {d.id === selectedId && <Check size={15} weight="bold" color={isDark ? "#FBBF24" : "#111111"} />}
                 </MenuItem>
               ))}
-              <Divider sx={{ my: 0.5, borderColor: isDark ? "#27272A" : "#E3ECFC" }} />
+              <Divider sx={{ my: 0.5, borderColor: isDark ? "#27272A" : "#E5E5E5" }} />
               <MenuItem onClick={() => { setMenuAnchor(null); router.push("/settings?tab=homepage"); }}
                 sx={{ py: 1, px: 1.75, mx: 0.5, borderRadius: "8px" }}>
                 <GearSix size={16} weight="duotone" className="mr-2.5" />
@@ -163,25 +163,30 @@ export default function DashboardPage() {
           {/* ═══════════════════════════════════════
               WELCOME BANNER
           ═══════════════════════════════════════ */}
-          <div className={`relative rounded-xl sm:rounded-2xl overflow-hidden ${isDark ? "bg-[var(--bg-card)]" : "bg-[#78350F]"}`}>
+          <div
+            className={`relative rounded-xl sm:rounded-2xl overflow-hidden ${isDark ? "bg-[var(--bg-card)]" : "bg-[var(--bg-card)] border border-[var(--serviceops-soft)]"}`}
+            style={isDark ? undefined : { boxShadow: "0 6px 24px rgba(17,17,17,0.08)" }}
+          >
             {/* Decorative blobs - hidden on mobile */}
-            <div className="absolute -right-10 -top-10 w-52 h-52 rounded-full bg-white/10 pointer-events-none hidden sm:block" />
-            <div className="absolute right-16 top-6 w-28 h-28 rounded-full bg-white/5 pointer-events-none hidden md:block" />
-            <div className="absolute right-48 -bottom-8 w-36 h-36 rounded-full bg-white/5 pointer-events-none hidden lg:block" />
-            <div className="absolute left-1/2 -bottom-4 w-20 h-20 rounded-full bg-white/5 pointer-events-none hidden md:block" />
+            <div className={`absolute -right-10 -top-10 w-52 h-52 rounded-full pointer-events-none hidden sm:block ${isDark ? "bg-white/10" : "bg-[var(--serviceops-primary-10)]"}`} />
+            <div className={`absolute right-16 top-6 w-28 h-28 rounded-full pointer-events-none hidden md:block ${isDark ? "bg-white/5" : "bg-[var(--serviceops-primary-10)]"}`} />
+            <div className={`absolute right-48 -bottom-8 w-36 h-36 rounded-full pointer-events-none hidden lg:block ${isDark ? "bg-white/5" : "bg-[var(--serviceops-primary-10)]"}`} />
+            <div className={`absolute left-1/2 -bottom-4 w-20 h-20 rounded-full pointer-events-none hidden md:block ${isDark ? "bg-white/5" : "bg-[var(--serviceops-primary-10)]"}`} />
             <div className="relative z-10 px-3 sm:px-4 md:px-6 pt-3 sm:pt-4 md:pt-5 pb-3 md:pb-4">
-              <p className="text-[#FDE68A] text-[11px] sm:text-[12px] font-semibold tracking-wide mb-0.5">👋 Good morning</p>
-              <h2 className="text-white text-base sm:text-lg md:text-[20px] font-extrabold tracking-tight mb-1">Welcome back, PM SDL</h2>
-              <p className="text-[#FDE68A] text-[11px] sm:text-[12px] mb-3 sm:mb-4">
+              <p className={`${isDark ? "text-[#FDE68A] font-semibold" : "text-[var(--serviceops-primary)] font-bold"} text-[11px] sm:text-[12px] tracking-wide mb-0.5`}>👋 Good morning</p>
+              <h2 className={`${isDark ? "text-white" : "text-[#111111]"} text-base sm:text-lg md:text-[21px] font-extrabold tracking-tight mb-1`}>
+                Welcome back, <span className={isDark ? undefined : "text-[var(--serviceops-primary)]"}>PM SDL</span>
+              </h2>
+              <p className={`${isDark ? "text-[#FDE68A]" : "text-[#6B6B6B]"} text-[11px] sm:text-[12px] mb-3 sm:mb-4`}>
                 Here&apos;s your ServiceOps snapshot for{" "}
-                <span className="text-white font-semibold">Saturday, 30 May 2026</span>
+                <span className={`${isDark ? "text-white" : "text-[#111111]"} font-semibold`}>Saturday, 30 May 2026</span>
               </p>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {quickStats.map(({ label, value, icon: Icon, color, colorDark }) => (
                   <div key={label} className={`flex items-center gap-1.5 sm:gap-2 ${isDark ? colorDark : color} backdrop-blur-sm rounded-lg sm:rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-[12px] font-semibold`}>
-                    <Icon size={12} weight="duotone" />
+                    <Icon size={12} weight="duotone" className={isDark ? undefined : "text-[var(--serviceops-primary)]"} />
                     <span className="font-bold">{value}</span>
-                    <span className="font-medium opacity-80 hidden xs:inline">{label}</span>
+                    <span className={`font-medium hidden xs:inline ${isDark ? "opacity-80" : "text-[#6B6B6B]"}`}>{label}</span>
                   </div>
                 ))}
               </div>
